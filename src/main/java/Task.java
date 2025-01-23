@@ -46,7 +46,16 @@ public class Task {
     }
 
     public String list() {
-        return "." + " [" +  this.code() + "]" + "[" + this.getStatusIcon() + "] " + this.getDescription();
+        return "." + " [" + this.code() + "]" + "[" + this.getStatusIcon() + "] " + this.getDescription();
+    }
+
+    public String delete() {
+        taskCount--;
+        return "____________________________________________________________\n" +
+                "     Noted. I've removed this task:\n" +
+                "       [" + this.code() + "]" + "[" + this.getStatusIcon() + "] " + this.getDescription() + "\n" +
+                "     Now you have " + taskCount + " tasks in the list.\n" +
+                "____________________________________________________________";
     }
     //...
 }

@@ -1,10 +1,10 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Steve{
-    public static void main(String[] args) throws InvalidTaskNumberException {
+    public static void main(String[] args) {
             Messages message = new Messages();
-            Task[] userData = new Task[100];
-            int taskCount = 0;
+            ArrayList<Task> userData = new ArrayList<>();
             System.out.println(message.greeting());
             Scanner scanner = new Scanner(System.in);
             String userInput = scanner.nextLine();
@@ -17,8 +17,8 @@ public class Steve{
                     switch (firstWord) {
                         case "list" -> {
                             System.out.println("____________________________________________________________");
-                            for (int i = 0, j = 0; i < taskCount; i++) {
-                                Task currTask = userData[i];
+                            for (int i = 0, j = 0; i < userData.size(); i++) {
+                                Task currTask = userData.get(i);
                                 System.out.println(++j + currTask.list());
 
                             }
@@ -27,22 +27,22 @@ public class Steve{
                         }
                         case "mark" -> {
                             int taskNumber = Integer.parseInt(userInput.split(" ")[1]);
-                            if (taskNumber < 0 || taskNumber >= taskCount) {
-                                throw new InvalidTaskNumberException("Task number " + taskNumber + " is invalid. Please enter a number within Task Count Range: " + taskCount);
+                            if (taskNumber < 1 || taskNumber > userData.size()) {
+                                throw new InvalidTaskNumberException("Task number " + taskNumber + " is invalid. Please enter a number within Task Count Range: " + userData.size());
                             }
-                            taskNumber--;
-                            userData[taskNumber].markAsDone();
-                            System.out.println(userData[taskNumber].message(firstWord));
+                            Task task = userData.get(taskNumber - 1);
+                            task.markAsDone();
+                            System.out.println(task.message(firstWord));
                             userInput = scanner.nextLine();
                         }
                         case "unmark" -> {
                             int taskNumber = Integer.parseInt(userInput.split(" ")[1]);
-                            if (taskNumber < 0 || taskNumber >= taskCount) {
-                                throw new InvalidTaskNumberException("Task number " + taskNumber + " is invalid. Please enter a number within Task Count Range: " + taskCount);
+                            if (taskNumber < 1 || taskNumber > userData.size()) {
+                                throw new InvalidTaskNumberException("Task number " + taskNumber + " is invalid. Please enter a number within Task Count Range: " + userData.size());
                             }
-                            taskNumber--;
-                            userData[taskNumber].markAsUndone();
-                            System.out.println(userData[taskNumber].message(firstWord));
+                            Task task = userData.get(taskNumber - 1); // Adjust for 0-based index
+                            task.markAsUndone();
+                            System.out.println(task.message(firstWord));
                             userInput = scanner.nextLine();
                         }
                         case "todo" -> {
@@ -58,10 +58,9 @@ public class Steve{
                             }
                             ToDo t = new ToDo(restOfLine);
                             System.out.println(t.message());
-                            userData[taskCount++] = t;
+                            userData.add(t);
                             userInput = scanner.nextLine();
                         }
-
                         case "deadline" -> {
                             Scanner lineScanner = new Scanner(userInput);
                             lineScanner.next();
@@ -75,10 +74,9 @@ public class Steve{
                             }
                             Deadline d = new Deadline(restOfLine);
                             System.out.println(d.message());
-                            userData[taskCount++] = d;
+                            userData.add(d);
                             userInput = scanner.nextLine();
                         }
-
                         case "event" -> {
                             Scanner lineScanner = new Scanner(userInput);
                             lineScanner.next();
@@ -92,7 +90,16 @@ public class Steve{
                             }
                             Event e = new Event(restOfLine);
                             System.out.println(e.message());
-                            userData[taskCount++] = e;
+                            userData.add(e);
+                            userInput = scanner.nextLine();
+                        }
+                        case "delete" -> {
+                            int taskNumber = Integer.parseInt(userInput.split(" ")[1]);
+                            if (taskNumber < 1 || taskNumber > userData.size()) {
+                                throw new InvalidTaskNumberException("Task number " + taskNumber + " is invalid. Please enter a number within Task Count Range: " + userData.size());
+                            }
+                            Task deletedTask = userData.remove(taskNumber - 1);
+                            System.out.println(deletedTask.delete());
                             userInput = scanner.nextLine();
                         }
                         default -> {
