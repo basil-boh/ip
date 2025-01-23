@@ -1,10 +1,16 @@
 public class Task {
     protected String description;
     protected boolean done;
+    protected static int taskCount = 0;
 
     public Task(String description) {
         this.description = description;
         this.done = false;
+        taskCount++;
+    }
+
+    public String code() {
+        return "Task";
     }
 
     public String getStatusIcon() {
@@ -33,6 +39,14 @@ public class Task {
 
     public void markAsUndone() {
         this.done = false;
+    }
+
+    public int taskCount() {
+        return taskCount;
+    }
+
+    public String list() {
+        return "." + " [" +  this.code() + "]" + "[" + this.getStatusIcon() + "] " + this.getDescription();
     }
     //...
 }
