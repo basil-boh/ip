@@ -23,4 +23,8 @@ class Messages {
         return "Description cannot be empty. Usage: todo <description>";
     }
 
+    public String border() {
+        return "____________________________________________________________";
+    }
+
 }

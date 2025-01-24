@@ -21,10 +21,6 @@ public class Task {
         return this.description;
     }
 
-    public void markAsDone() {
-        this.done = true;
-    }
-
     public String message(String word) {
         return word.equals("mark")
                 ? "____________________________________________________________\n" +
@@ -37,12 +33,15 @@ public class Task {
                 "____________________________________________________________";
     }
 
-    public void markAsUndone() {
-        this.done = false;
+    public void markDoneOrNot(boolean isDone) {
+        this.done = isDone;
     }
 
     public int taskCount() {
         return taskCount;
+    }
+    public void decreaseTaskCount() {
+        taskCount--;
     }
 
     public String list() {
@@ -57,5 +56,12 @@ public class Task {
                 "     Now you have " + taskCount + " tasks in the list.\n" +
                 "____________________________________________________________";
     }
-    //...
+
+    public static void validateTaskNumber(int taskNumber, int taskCount) throws InvalidTaskNumberException {
+        if (taskNumber < 1 || taskNumber > taskCount) {
+            throw new InvalidTaskNumberException(
+                    "Task number " + taskNumber + " is invalid. Please enter a number within Task Count Range: " + taskCount
+            );
+        }
+    }
 }

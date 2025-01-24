@@ -3,23 +3,40 @@ public class Deadline extends Task {
     protected String by;
 
     public Deadline(String description) {
-        super(description);
-        String[] parts = description.split("/by");
-        this.description = parts[0].trim();
-        this.by = parts[1].trim();
+        super(description == null || description.trim().isEmpty()
+                ? "Description cannot be empty. Usage: deadline <description /By Sunday>"
+                : description);
+        if(description != null && !description.isEmpty()) {
+            String[] parts = description.split("/by");
+            this.description = parts[0].trim();
+            this.by = parts[1].trim();
+        }
+        else {
+            this.description = "Description cannot be empty. Usage: deadline <description /By day>";
+            super.decreaseTaskCount();
+        }
     }
 
     public String message() {
-        return "____________________________________________________________\n" +
-                "     Got it. I've added this task:\n" +
-                "       [D][ ] " + description + " (By: " + this.by + ") \n" +
-                "     Now you have " + taskCount() + " tasks in the list.\n" +
-                "____________________________________________________________";
+        return this.description.equals("Description cannot be empty. Usage: deadline <description /By day>")
+                ?   this.description
+                :   "____________________________________________________________\n" +
+                    "     Got it. I've added this task:\n" +
+                    "       [D][ ] " + description + " (By: " + this.by + ") \n" +
+                    "     Now you have " + taskCount() + " tasks in the list.\n" +
+                    "____________________________________________________________";
     }
 
     @Override
     public String getDescription() {
-        return this.description + " (By: " + this.by + ") ";
+        String result;
+        if (this.by != null) {
+            result = this.description + " (By: " + this.by + ") ";
+        }
+        else {
+            result = this.description;
+        }
+        return result;
     }
 
     @Override
