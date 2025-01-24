@@ -1,9 +1,9 @@
 class Messages {
-    public String greeting() {
-        return "____________________________________________________________\n" +
+    public void greeting() {
+        System.out.println("____________________________________________________________\n" +
                 "     Hello! I'm Steve\n" +
                 "     What can I do for you?\n" +
-                "____________________________________________________________";
+                "____________________________________________________________");
     }
 
     public String goodbye() {
@@ -12,19 +12,21 @@ class Messages {
                 "____________________________________________________________";
     }
 
-    public String unknown() {
+    public void unknown() {
         String first = "Sorry I don't quite understand!";
         String second = " Please add a task by entering: \n 1. todo \n 2. deadline \n 3. event \n";
         String third = "Followed by a description of your task! =)";
-        return first + second + third;
+        System.out.println(first + second + third);
     }
 
     public String descriptionEmpty() {
         return "Description cannot be empty. Usage: todo <description>";
     }
 
-    public String border() {
-        return "____________________________________________________________";
+    public void border() {
+        System.out.println("____________________________________________________________");
     }
-
+    public String formatExceptionMessage() {
+        return "Please enter a valid number for the task!";
+    }
 }

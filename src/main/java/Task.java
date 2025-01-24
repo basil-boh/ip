@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Task {
     protected String description;
     protected boolean done;
@@ -21,8 +23,8 @@ public class Task {
         return this.description;
     }
 
-    public String message(String word) {
-        return word.equals("mark")
+    public void message(String word) {
+        String result = word.equals("mark")
                 ? "____________________________________________________________\n" +
                 "     Nice! I've marked this task as done:\n" +
                 "       [X] " + this.description + "\n" +
@@ -31,6 +33,7 @@ public class Task {
                 "     OK, I've marked this task as not done yet:\n" +
                 "       [ ] " + this.description + "\n" +
                 "____________________________________________________________";
+        System.out.println(result);
     }
 
     public void markDoneOrNot(boolean isDone) {
@@ -48,20 +51,41 @@ public class Task {
         return "." + " [" + this.code() + "]" + "[" + this.getStatusIcon() + "] " + this.getDescription();
     }
 
-    public String delete() {
+    public void delete() {
         taskCount--;
-        return "____________________________________________________________\n" +
+        String result = "____________________________________________________________\n" +
                 "     Noted. I've removed this task:\n" +
                 "       [" + this.code() + "]" + "[" + this.getStatusIcon() + "] " + this.getDescription() + "\n" +
                 "     Now you have " + taskCount + " tasks in the list.\n" +
                 "____________________________________________________________";
+        System.out.println(result);
     }
 
-    public static void validateTaskNumber(int taskNumber, int taskCount) throws InvalidTaskNumberException {
+    public static void validateTaskNumberMark(int taskNumber, int taskCount, ArrayList<Task> userData, CommandType command, String firstWord) throws InvalidTaskNumberException {
         if (taskNumber < 1 || taskNumber > taskCount) {
             throw new InvalidTaskNumberException(
                     "Task number " + taskNumber + " is invalid. Please enter a number within Task Count Range: " + taskCount
             );
         }
+        else {
+            Task task = userData.get(taskNumber - 1);
+            task.markDoneOrNot(command == CommandType.mark);
+            task.message(firstWord);
+        }
+    }
+    public static void validateTaskNumberDel(int taskNumber, int taskCount, ArrayList<Task> userData) throws InvalidTaskNumberException {
+        if (taskNumber < 1 || taskNumber > taskCount) {
+            throw new InvalidTaskNumberException(
+                    "Task number " + taskNumber + " is invalid. Please enter a number within Task Count Range: " + taskCount
+            );
+        }
+        else {
+            Task deletedTask = userData.remove(taskNumber - 1);
+            deletedTask.delete();
+        }
+    }
+
+    public boolean isValid() {
+        return false;
     }
 }

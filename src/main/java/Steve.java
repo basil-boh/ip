@@ -5,7 +5,7 @@ public class Steve{
     public static void main(String[] args) {
             Messages message = new Messages();
             ArrayList<Task> userData = new ArrayList<>();
-            System.out.println(message.greeting());
+            message.greeting();
             Scanner scanner = new Scanner(System.in);
             String userInput = scanner.nextLine();
             String restOfLine;
@@ -23,58 +23,42 @@ public class Steve{
 
                     switch (command) {
                         case list -> {
-                            System.out.println(message.border());
-                            for (int i = 0, j = 0; i < userData.size(); i++) {
-                                Task currTask = userData.get(i);
-                                System.out.println(++j + currTask.list());
-                            }
-                            System.out.println(message.border());
+                            printList(message, userData);
                             userInput = scanner.nextLine();
                         }
                         case mark, unmark-> {
                             int taskNumber = Integer.parseInt(userInput.split(" ")[1]);
-                            Task.validateTaskNumber(taskNumber, userData.size());
-                            Task task = userData.get(taskNumber - 1);
-                            task.markDoneOrNot(command == CommandType.mark);
-                            System.out.println(task.message(firstWord));
+                            Task.validateTaskNumberMark(taskNumber, userData.size(), userData, command, firstWord);
                             userInput = scanner.nextLine();
                         }
                         case todo -> {
                             restOfLine = userInput.substring(firstWord.length()).trim();
                             ToDo t = new ToDo(restOfLine);
-                            System.out.println(t.message());
-                            if(!restOfLine.isEmpty()) {
-                                userData.add(t);
-                            }
+                            t.message();
+                            addTask(userData, t);
                             userInput = scanner.nextLine();
                         }
                         case deadline -> {
                             restOfLine = userInput.substring(firstWord.length()).trim();
                             Deadline d = new Deadline(restOfLine);
-                            System.out.println(d.message());
-                            if(!restOfLine.isEmpty()) {
-                                userData.add(d);
-                            }
+                            d.message();
+                            addTask(userData, d);
                             userInput = scanner.nextLine();
                         }
                         case event -> {
                             restOfLine = userInput.substring(firstWord.length()).trim();
                             Event e = new Event(restOfLine);
-                            System.out.println(e.message());
-                            if(!restOfLine.isEmpty()) {
-                                userData.add(e);
-                            }
+                            e.message();
+                            addTask(userData, e);
                             userInput = scanner.nextLine();
                         }
                         case delete -> {
                             int taskNumber = Integer.parseInt(userInput.split(" ")[1]);
-                            Task.validateTaskNumber(taskNumber, userData.size());
-                            Task deletedTask = userData.remove(taskNumber - 1);
-                            System.out.println(deletedTask.delete());
+                            Task.validateTaskNumberDel(taskNumber, userData.size(), userData);
                             userInput = scanner.nextLine();
                         }
                         case unknown -> {
-                            System.out.println(message.unknown());
+                            message.unknown();
                             userInput = scanner.nextLine();
                         }
                     }
@@ -84,10 +68,25 @@ public class Steve{
                     userInput = scanner.nextLine();
                 }
                 catch (NumberFormatException e) { //E.g. Catches invalid inputs like mark/unmark abc
-                    System.out.println("Please enter a valid number for the task!");
+                    System.out.println(message.formatExceptionMessage());
                     userInput = scanner.nextLine();
                 }
             }
             System.out.println(message.goodbye());
     }
+    public static void printList(Messages message, ArrayList<Task> userData) {
+        message.border();
+        for (int i = 0, j = 0; i < userData.size(); i++) {
+            Task currTask = userData.get(i);
+            System.out.println(++j + currTask.list());
+        }
+        message.border();
+    }
+
+    private static void addTask(ArrayList<Task> userData, Task task) {
+        if (task.isValid()) {
+            userData.add(task);
+        }
+    }
 }
+
