@@ -54,7 +54,7 @@ public class Steve{
                             restOfLine = userInput.substring(firstWord.length()).trim();
                             Event e = new Event(restOfLine); //Creates deadline object with using description
                             e.message(); //Prints object message
-                            addTask(userData, e); //Prints object message
+                            addTask(userData, e); //Adds tasks to Task ArrayList
                             userInput = scanner.nextLine();
                         }
                         case delete -> { //Command: delete
