@@ -52,4 +52,9 @@ public class Event extends Task {
     public String type() {
         return "Event: ";
     }
+
+    @Override
+    public String getOriginalDescription() {
+        return this.description + " "+ "/from " + this.from + " /to " + this.to;
+    }
 }

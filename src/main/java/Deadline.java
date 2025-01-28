@@ -41,6 +41,10 @@ public class Deadline extends Task {
         }
         return result;
     }
+    @Override
+    public String getOriginalDescription() {
+        return this.description + " /by " + this.by;
+    }
 
     @Override
     public String code() {

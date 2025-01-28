@@ -59,7 +59,7 @@ public class Task {
         taskCount--;
         String result = "____________________________________________________________\n" +
                 "     Noted. I've removed this task:\n" +
-                "       [" + this.code() + "]" + "[" + this.getStatusIcon() + "] " + this.getDescription() + "\n" +
+                "       [" + this.code() + "]" + "[" + this.getStatusIcon() + "] " + this.getOriginalDescription() + "\n" +
                 "     Now you have " + taskCount + " tasks in the list.\n" +
                 "____________________________________________________________";
         System.out.println(result);
@@ -97,9 +97,13 @@ public class Task {
         return false;
     }
 
+    public String getOriginalDescription() {
+        return this.description;
+    }
+
     public static void saveTasks(Task task) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
-                writer.write(task.type() + task.getDescription());
+                writer.write(task.type() + task.getOriginalDescription());
                 writer.newLine(); // Add a new line after each task
             System.out.println("Tasks saved successfully!");
         } catch (IOException e) {

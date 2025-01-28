@@ -41,4 +41,9 @@ public class ToDo extends Task {
         return "Todo: ";
     }
 
+    @Override
+    public String getOriginalDescription() {
+        return this.description;
+    }
+
 }
