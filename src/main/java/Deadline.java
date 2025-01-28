@@ -48,6 +48,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String type() {
+        return "Deadline: ";
+    }
+
+    @Override
     public boolean isValid() {
         return isValid;
     }

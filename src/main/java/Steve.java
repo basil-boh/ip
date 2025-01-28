@@ -92,7 +92,9 @@ public class Steve{
     private static void addTask(ArrayList<Task> userData, Task task) {
         if (task.isValid()) {
             userData.add(task);
+            Task.saveTasks(task);
         }
+
     }
 }
 

@@ -44,7 +44,12 @@ public class Event extends Task {
 
     @Override
     public boolean isValid() {
+
         return isValid;
     }
 
+    @Override
+    public String type() {
+        return "Event: ";
+    }
 }

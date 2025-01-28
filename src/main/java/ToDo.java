@@ -32,7 +32,13 @@ public class ToDo extends Task {
 
     @Override
     public boolean isValid() {
+
         return isValid;
+    }
+
+    @Override
+    public String type() {
+        return "Todo: ";
     }
 
 }
