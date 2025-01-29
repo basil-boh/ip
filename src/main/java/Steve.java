@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Steve{
+public class Steve{ //Merge commit test
     public static void main(String[] args) {
         // Initialising objects & variables 
             Messages message = new Messages();
