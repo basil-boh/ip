@@ -17,6 +17,9 @@ public class ToDo extends Task {
             this.isValid = true;
         }
     }
+    public String getDescription() {
+        return this.description;
+    }
 
     public void message() {
         String result = !this.description.equals("Description cannot be empty. Usage: todo <description>") ? "____________________________________________________________\n" +
@@ -25,6 +28,16 @@ public class ToDo extends Task {
                 "     Now you have " + taskCount() + " tasks in the list.\n" +
                 "____________________________________________________________" : "Description cannot be empty. Usage: todo <description>";
         System.out.println(result);
+    }
+    @Override
+    public String toString() {
+        return !this.description.equals("Description cannot be empty. Usage: todo <description>")
+                ? "____________________________________________________________\n" +
+                "     Got it. I've added this task:\n" +
+                "       [T][ ] " + description + "\n" +
+                "     Now you have " + taskCount() + " tasks in the list.\n" +
+                "____________________________________________________________"
+                : "Description cannot be empty. Usage: todo <description>";
     }
 
     @Override

@@ -53,6 +53,18 @@ public class Event extends Task {
     }
 
     @Override
+    public String toString() {
+        String result = this.description.startsWith("Invalid") || this.description.startsWith("Description cannot be empty")
+                ? this.description
+                : "____________________________________________________________\n" +
+                "     Got it. I've added this task:\n" +
+                "       [E][ ] " + description + " (From: " + formatDateTime(from) + " to: " + formatDateTime(to) + ") \n" +
+                "     Now you have " + taskCount() + " tasks in the list.\n" +
+                "____________________________________________________________";
+        return result;
+    }
+
+    @Override
     public String getDescription() {
         return this.description + " (From: " + formatDateTime(from) + " to: " + formatDateTime(to) + ") ";
     }
