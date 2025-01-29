@@ -44,7 +44,17 @@ public class Event extends Task {
 
     @Override
     public boolean isValid() {
+
         return isValid;
     }
 
+    @Override
+    public String type() {
+        return "Event: ";
+    }
+
+    @Override
+    public String getOriginalDescription() {
+        return this.description + " "+ "/from " + this.from + " /to " + this.to;
+    }
 }

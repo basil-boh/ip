@@ -1,9 +1,13 @@
 import java.util.ArrayList;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Task {
     protected String description;
     protected boolean done;
     protected static int taskCount = 0;
+    private static final String FILE_PATH = "src/main/data/steve.txt";
 
     public Task(String description) {
         this.description = description;
@@ -55,7 +59,7 @@ public class Task {
         taskCount--;
         String result = "____________________________________________________________\n" +
                 "     Noted. I've removed this task:\n" +
-                "       [" + this.code() + "]" + "[" + this.getStatusIcon() + "] " + this.getDescription() + "\n" +
+                "       [" + this.code() + "]" + "[" + this.getStatusIcon() + "] " + this.getOriginalDescription() + "\n" +
                 "     Now you have " + taskCount + " tasks in the list.\n" +
                 "____________________________________________________________";
         System.out.println(result);
@@ -85,7 +89,25 @@ public class Task {
         }
     }
 
+    public String type() {
+        return "Task: ";
+    }
+
     public boolean isValid() {
         return false;
+    }
+
+    public String getOriginalDescription() {
+        return this.description;
+    }
+
+    public static void saveTasks(Task task) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
+                writer.write(task.type() + task.getOriginalDescription());
+                writer.newLine(); // Add a new line after each task
+            System.out.println("Tasks saved successfully!");
+        } catch (IOException e) {
+            System.err.println("Error saving tasks: " + e.getMessage());
+        }
     }
 }

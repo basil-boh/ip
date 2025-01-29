@@ -1,0 +1,5 @@
+Todo: my hair!
+Todo: my nails
+Deadline: homework /by sunday
+Todo: play soccer
+Event: meeting /from now /to later
