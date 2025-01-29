@@ -1,40 +1,59 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Event extends Task {
     protected String description;
-    protected String from;
-    protected String to;
+    protected LocalDateTime from;
+    protected LocalDateTime to;
     protected boolean isValid = false;
 
     public Event(String description) {
         super(description == null || description.trim().isEmpty()
-                ? "Description cannot be empty. Usage: event <description /from Sunday /to Wed>"
+                ? "Description cannot be empty. Usage: event <description /from yyyy-MM-dd HHmm /to yyyy-MM-dd HHmm>"
                 : description);
+
         if (description != null && !description.trim().isEmpty()) {
             String[] parts = description.split("/");
-            this.description = parts[0].trim();
-            this.from = parts[1].replace("from", "").trim();
-            this.to = parts[2].replace("to", "").trim();
-            this.isValid = true;
-        }
-        else {
-            this.description = "Description cannot be empty. Usage: event <description /from Sunday /to Wed>";
+            if (parts.length == 3) {
+                this.description = parts[0].trim();
+                String fromString = parts[1].replace("from", "").trim();
+                String toString = parts[2].replace("to", "").trim();
+
+                try {
+                    // Parse the start and end dates/times
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+                    this.from = LocalDateTime.parse(fromString, formatter);
+                    this.to = LocalDateTime.parse(toString, formatter);
+                    this.isValid = true;
+                } catch (DateTimeParseException e) {
+                    this.description = "Invalid date/time format. Usage: event <description /from yyyy-MM-dd HHmm /to yyyy-MM-dd HHmm>";
+                    super.decreaseTaskCount();
+                }
+            } else {
+                this.description = "Invalid format. Usage: event <description /from yyyy-MM-dd HHmm /to yyyy-MM-dd HHmm>";
+                super.decreaseTaskCount();
+            }
+        } else {
+            this.description = "Description cannot be empty. Usage: event <description /from yyyy-MM-dd HHmm /to yyyy-MM-dd HHmm>";
             super.decreaseTaskCount();
         }
     }
 
     public void message() {
-        String result = this.description.equals("Description cannot be empty. Usage: event <description /from Sunday /to Wed>")
-                ? "Description cannot be empty. Usage: event <description /from Sunday /to Wed>"
-                :   "____________________________________________________________\n" +
-                    "     Got it. I've added this task:\n" +
-                    "       [E][ ] " + description + " (From: " + this.from + " to: " + this.to + ") \n" +
-                    "     Now you have " + taskCount() + " tasks in the list.\n" +
-                    "____________________________________________________________";
+        String result = this.description.startsWith("Invalid") || this.description.startsWith("Description cannot be empty")
+                ? this.description
+                : "____________________________________________________________\n" +
+                "     Got it. I've added this task:\n" +
+                "       [E][ ] " + description + " (From: " + formatDateTime(from) + " to: " + formatDateTime(to) + ") \n" +
+                "     Now you have " + taskCount() + " tasks in the list.\n" +
+                "____________________________________________________________";
         System.out.println(result);
     }
 
     @Override
     public String getDescription() {
-        return this.description + " (From: " + this.from + " to: " + this.to + ") ";
+        return this.description + " (From: " + formatDateTime(from) + " to: " + formatDateTime(to) + ") ";
     }
 
     @Override
@@ -44,7 +63,6 @@ public class Event extends Task {
 
     @Override
     public boolean isValid() {
-
         return isValid;
     }
 
@@ -55,6 +73,12 @@ public class Event extends Task {
 
     @Override
     public String getOriginalDescription() {
-        return this.description + " "+ "/from " + this.from + " /to " + this.to;
+        return this.description + " /from " + (from != null ? from.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")) : "") +
+                " /to " + (to != null ? to.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")) : "");
+    }
+
+    private String formatDateTime(LocalDateTime dateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy, hh:mm a");
+        return dateTime.format(formatter);
     }
 }
