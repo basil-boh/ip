@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.IOException;
 
-public class Steve{ //Merge commit test
+public class Steve{ //Merge commit main
     public static void main(String[] args) {
         // Initialising objects & variables
             Messages message = new Messages();
