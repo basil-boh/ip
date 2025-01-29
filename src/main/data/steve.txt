@@ -3,3 +3,4 @@ Todo: my nails
 Deadline: homework /by sunday
 Todo: play soccer
 Event: meeting /from now /to later
+Deadline: buy products /by 2024-05-13 1600
