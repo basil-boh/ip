@@ -1,8 +1,10 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
+package steve.ui;
+
+import steve.tasks.Task;
+import steve.tasks.TaskManager;
+import steve.ui.UserInterface;
+import steve.storage.FileHandler;
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.IOException;
 
 public class Steve{ //Merge commit main msg
     public static void main(String[] args) {

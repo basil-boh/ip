@@ -1,4 +1,6 @@
-class InvalidTaskNumberException extends Exception {
+package steve.exceptions;
+
+public class InvalidTaskNumberException extends Exception {
     public InvalidTaskNumberException(String message) {
         super(message);
     }

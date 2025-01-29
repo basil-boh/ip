@@ -1,3 +1,8 @@
+package steve.commands;
+
+import steve.tasks.Deadline;
+import steve.tasks.TaskManager;
+
 public class DeadlineCommand implements Command {
     private TaskManager taskManager;
     private String userInput;

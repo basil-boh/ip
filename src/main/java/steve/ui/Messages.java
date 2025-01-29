@@ -1,3 +1,5 @@
+package steve.ui;
+
 public class Messages {
     public static void greeting() {
         System.out.println("____________________________________________________________\n" +

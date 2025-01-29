@@ -1,3 +1,9 @@
+package steve.storage;
+import steve.tasks.Deadline;
+import steve.tasks.Task;
+import steve.tasks.ToDo;
+import steve.tasks.Event;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

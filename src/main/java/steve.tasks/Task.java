@@ -1,3 +1,7 @@
+package steve.tasks;
+import steve.commands.CommandType;
+import steve.exceptions.InvalidTaskNumberException;
+
 import java.util.ArrayList;
 import java.io.BufferedWriter;
 import java.io.FileWriter;

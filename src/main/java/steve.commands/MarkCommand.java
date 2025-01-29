@@ -1,3 +1,8 @@
+package steve.commands;
+
+import steve.exceptions.InvalidTaskNumberException;
+import steve.tasks.TaskManager;
+
 public class MarkCommand implements Command {
     private TaskManager taskManager;
     private String userInput;
