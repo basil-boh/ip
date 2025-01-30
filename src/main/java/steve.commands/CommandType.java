@@ -2,5 +2,5 @@ package steve.commands;
 
 // enum class of command types
 public enum CommandType {
-    list, mark, unmark, todo, deadline, event, delete, bye, unknown
+    List, Mark, Unmark, Todo, Deadline, Event, Delete, Bye, Unknown
 }
