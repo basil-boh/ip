@@ -6,6 +6,7 @@ import steve.tasks.TaskManager;
 
 import java.util.Scanner;
 
+// Manages UI flow of chatbot
 public class UserInterface {
     private TaskManager taskManager;
     private Scanner scanner;

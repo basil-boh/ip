@@ -4,6 +4,7 @@ import steve.exceptions.InvalidTaskNumberException;
 import java.util.ArrayList;
 import java.util.List;
 
+// Manages task
 public class TaskManager {
     private ArrayList<Task> tasks;
 

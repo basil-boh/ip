@@ -3,6 +3,7 @@ package steve.commands;
 import steve.exceptions.InvalidTaskNumberException;
 import steve.tasks.TaskManager;
 
+// Delete command that removes tasks from list
 public class DeleteCommand implements Command {
     private TaskManager taskManager;
     private String userInput;

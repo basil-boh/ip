@@ -3,6 +3,7 @@ package steve.commands;
 import steve.tasks.Deadline;
 import steve.tasks.TaskManager;
 
+// Deadline command that specifies due date & time of task
 public class DeadlineCommand implements Command {
     private TaskManager taskManager;
     private String userInput;

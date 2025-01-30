@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+//Handles loading and parsing of tasks
 public class FileHandler {
     private String filePath;
 

@@ -5,6 +5,7 @@ import steve.ui.Messages;
 
 import java.util.List;
 
+// Displays list of tasks
 public class ListCommand implements Command {
     private TaskManager taskManager;
 

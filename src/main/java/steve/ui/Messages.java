@@ -1,5 +1,6 @@
 package steve.ui;
 
+// Prints messages of chatbot
 public class Messages {
     public static void greeting() {
         System.out.println("____________________________________________________________\n" +

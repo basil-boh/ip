@@ -7,6 +7,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+// General Task
 public class Task {
     protected String description;
     protected boolean done;

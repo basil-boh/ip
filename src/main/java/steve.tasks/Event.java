@@ -3,6 +3,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+// Event task
 public class Event extends Task {
     protected String description;
     protected LocalDateTime from;

@@ -3,6 +3,7 @@ package steve.commands;
 import steve.exceptions.InvalidTaskNumberException;
 import steve.tasks.TaskManager;
 
+// Marks Tasks
 public class MarkCommand implements Command {
     private TaskManager taskManager;
     private String userInput;

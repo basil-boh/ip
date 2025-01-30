@@ -3,6 +3,7 @@ package steve.commands;
 import steve.tasks.TaskManager;
 import steve.tasks.ToDo;
 
+// Executes todo tasks
 public class TodoCommand implements Command {
     private TaskManager taskManager;
     private String userInput;

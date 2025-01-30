@@ -6,7 +6,8 @@ import steve.ui.UserInterface;
 import steve.storage.FileHandler;
 import java.util.ArrayList;
 
-public class Steve{ //Merge commit main msg
+// Main Class File
+public class Steve{
     public static void main(String[] args) {
         FileHandler fileHandler = new FileHandler("src/main/data/steve.txt");
         ArrayList<Task> tasks = fileHandler.loadTasks(); // Load tasks from file

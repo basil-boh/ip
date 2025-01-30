@@ -3,6 +3,7 @@ package steve.commands;
 import steve.tasks.Event;
 import steve.tasks.TaskManager;
 
+// Executes Event tasks
 public class EventCommand implements Command {
     private TaskManager taskManager;
     private String userInput;
