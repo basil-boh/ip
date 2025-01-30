@@ -77,7 +77,7 @@ public class Task {
         }
         else {
             Task task = userData.get(taskNumber - 1);
-            task.markDoneOrNot(command == CommandType.mark);
+            task.markDoneOrNot(command == CommandType.Mark);
             task.message(firstWord);
         }
     }
