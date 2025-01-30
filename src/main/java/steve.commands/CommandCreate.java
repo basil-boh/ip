@@ -3,10 +3,13 @@ package steve.commands;
 import steve.exceptions.InvalidCommandException;
 import steve.tasks.TaskManager;
 
+
 public class CommandCreate {
     public static Command createCommand(String userInput, TaskManager taskManager) throws InvalidCommandException {
         String firstWord = userInput.split(" ")[0];
         switch (firstWord) {
+            case "find":
+                return new FindCommand(taskManager, userInput);
             case "list":
                 return new ListCommand(taskManager);
             case "mark":
