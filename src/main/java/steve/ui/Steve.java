@@ -1,13 +1,23 @@
 package steve.ui;
 
-import steve.tasks.Task;
-import steve.tasks.TaskManager;
-import steve.ui.UserInterface;
-import steve.storage.FileHandler;
 import java.util.ArrayList;
 
-// Main Class File
-public class Steve{
+import steve.storage.FileHandler;
+import steve.tasks.Task;
+import steve.tasks.TaskManager;
+
+/**
+ * Main entry point for the Steve chatbot application.
+ * Initializes the system by loading tasks, creating necessary objects, and starting the user interface.
+ */
+public class Steve {
+
+    /**
+     * The main method that runs the application.
+     * Loads tasks from the file, initializes the TaskManager and UserInterface, and starts the application.
+     *
+     * @param args command-line arguments (not used)
+     */
     public static void main(String[] args) {
         FileHandler fileHandler = new FileHandler("src/main/data/steve.txt");
         ArrayList<Task> tasks = fileHandler.loadTasks(); // Load tasks from file
@@ -18,4 +28,5 @@ public class Steve{
         ui.start();
     }
 }
+
 

@@ -1,18 +1,29 @@
 package steve.commands;
+
+import java.util.List;
+
 import steve.tasks.Task;
 import steve.tasks.TaskManager;
 import steve.ui.Messages;
 
-import java.util.List;
-
-// Displays list of tasks
+/**
+ * Represents a command that displays the list of tasks in the task manager.
+ */
 public class ListCommand implements Command {
     private TaskManager taskManager;
 
+    /**
+     * Constructs a ListCommand with the specified task manager.
+     *
+     * @param taskManager The task manager that manages the list of tasks.
+     */
     public ListCommand(TaskManager taskManager) {
         this.taskManager = taskManager;
     }
 
+    /**
+     * Executes the list command by retrieving and displaying all tasks.
+     */
     @Override
     public void execute() {
         List<Task> tasks = taskManager.getTasks();

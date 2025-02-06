@@ -1,34 +1,67 @@
 package steve.ui;
 
-// Prints messages of chatbot
+/**
+ * Provides static methods for printing various messages in the chatbot interface.
+ */
 public class Messages {
+
+    /**
+     * Prints the greeting message when the chatbot starts.
+     */
     public static void greeting() {
-        System.out.println("____________________________________________________________\n" +
-                "     Hello! I'm Steve\n" +
-                "     What can I do for you?\n" +
-                "____________________________________________________________");
+        System.out.println("____________________________"
+                + "________________________________\n"
+                + "     Hello! I'm Steve\n"
+                + "     What can I do for you?\n"
+                + "_________________________"
+                + "___________________________________");
     }
 
+    /**
+     * Prints the goodbye message when the chatbot exits.
+     */
     public static void goodbye() {
-        System.out.println("____________________________________________________________\n" +
-                "     \n" + "Bye! Hope to see you again soon =)" + "\n" +
-                "____________________________________________________________");
+        System.out.println("____________________________"
+                + "________________________________\n"
+                + "     \n" + "Bye! Hope to see you again soon =)" + "\n"
+                + "______________________________"
+                + "______________________________");
     }
 
+    /**
+     * Prints an error message when the chatbot does not understand the user input.
+     */
     public static void unknown() {
         String first = "Sorry I don't quite understand!";
-        String second = " Please add a task by entering: \n 1. todo \n 2. deadline \n 3. event \n 4. find \n";
+        String second = " Please add a task by entering: \n 1. todo "
+                + "\n 2. deadline \n 3. event \n 4. find \n";
         String third = "Followed by a description of your task! =)";
         System.out.println(first + second + third);
     }
 
+    /**
+     * Returns a message indicating that the description cannot be empty.
+     *
+     * @return the message about empty description
+     */
     public static String descriptionEmpty() {
-        return "Description cannot be empty. Usage: todo <description>";
+        return "Description cannot be empty. "
+                + "Usage: todo <description>";
     }
 
+    /**
+     * Prints a border line for visual separation of messages.
+     */
     public static void border() {
-        System.out.println("____________________________________________________________");
+        System.out.println("_________________________"
+                + "___________________________________");
     }
+
+    /**
+     * Returns a message prompting the user to enter a valid number for the task.
+     *
+     * @return the message for invalid task number input
+     */
     public static String formatExceptionMessage() {
         return "Please enter a valid number for the task!";
     }

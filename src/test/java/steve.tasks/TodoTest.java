@@ -1,18 +1,21 @@
 package steve.tasks;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class TodoTest {
 
     @Test
     public void testValidTodoMessage() {
         ToDo todo = new ToDo("Read a book");
-        String expectedMessage = "____________________________________________________________\n" +
-                "     Got it. I've added this task:\n" +
-                "       [T][ ] Read a book\n" +
-                "     Now you have " + todo.taskCount() + " tasks in the list.\n" +
-                "____________________________________________________________";
+        String expectedMessage = "____________________________"
+                + "________________________________\n"
+                + "     Got it. I've added this task:\n"
+                + "       [T][ ] Read a book\n"
+                + "     Now you have " + todo.taskCount() + " tasks in the list.\n"
+                + "__________________________"
+                + "__________________________________";
 
         assertEquals(expectedMessage, todo.toString());
     }
@@ -25,3 +28,4 @@ public class TodoTest {
         assertEquals(expectedMessage, todo.getDescription());
     }
 }
+
