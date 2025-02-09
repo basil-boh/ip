@@ -27,6 +27,13 @@ public class Steve {
         // Start the application
         ui.start();
     }
+
+    /**
+     * Generates a response for the user's chat message.
+     */
+    public String getResponse(String input) {
+        return "Steve heard: " + input;
+    }
 }
 
 
