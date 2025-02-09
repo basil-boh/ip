@@ -10,12 +10,18 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Region;
+import steve.storage.FileHandler;
+import steve.tasks.Task;
+import steve.tasks.TaskManager;
+
+import java.util.ArrayList;
 
 /**
  * The main JavaFX application class.
  * This class sets up and displays a simple JavaFX window with a "Hello World" label.
  */
 public class Main extends Application {
+    private Steve steve = new Steve();
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -23,14 +29,14 @@ public class Main extends Application {
     private Scene scene;
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image steveImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    private Steve steve = new Steve();
+
     /**
      * Creates a dialog box containing user input, and appends it to
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
         String userText = userInput.getText();
-        String steveText = steve.getResponse(userInput.getText());
+        String steveText = steve.getUi().getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
           DialogBox.getUserDialog(userText, userImage),
           DialogBox.getSteveDialog(steveText, steveImage)
@@ -60,9 +66,13 @@ public class Main extends Application {
 
         scene = new Scene(mainLayout);
 
+        // Display greeting message at the start
+        String greeting = Messages.greetingToString();
+        dialogContainer.getChildren().add(DialogBox.getSteveDialog(greeting, steveImage));
+
         //Formatting the window to look as expected
 
-        stage.setTitle("Duke");
+        stage.setTitle("Steve");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);

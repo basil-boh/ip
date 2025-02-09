@@ -26,9 +26,9 @@ public class FindCommand implements Command {
      * Executes the find command by filtering tasks that match the keyword.
      */
     @Override
-    public void execute() {
+    public String execute() {
         Find find = new Find(this.keyword, this.taskManager);
-        find.filter();
+        return find.filterString();
     }
 }
 

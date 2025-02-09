@@ -2,6 +2,10 @@ package steve.ui;
 
 import java.util.ArrayList;
 
+import javafx.application.Platform;
+import steve.commands.Command;
+import steve.commands.CommandCreate;
+import steve.exceptions.InvalidCommandException;
 import steve.storage.FileHandler;
 import steve.tasks.Task;
 import steve.tasks.TaskManager;
@@ -11,6 +15,22 @@ import steve.tasks.TaskManager;
  * Initializes the system by loading tasks, creating necessary objects, and starting the user interface.
  */
 public class Steve {
+    private TaskManager taskManager;
+    private UserInterface ui;
+
+    public Steve() {
+        FileHandler fileHandler = new FileHandler("src/main/data/steve.txt");
+        this.taskManager = new TaskManager(fileHandler.loadTasks());
+        this.ui = new UserInterface(taskManager);
+    }
+
+    public UserInterface getUi() {
+        return ui;
+    }
+
+    public TaskManager getTaskManager() {
+        return taskManager;
+    }
 
     /**
      * The main method that runs the application.
@@ -26,13 +46,6 @@ public class Steve {
 
         // Start the application
         ui.start();
-    }
-
-    /**
-     * Generates a response for the user's chat message.
-     */
-    public String getResponse(String input) {
-        return "Steve heard: " + input;
     }
 }
 

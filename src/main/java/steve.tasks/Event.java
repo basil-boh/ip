@@ -69,9 +69,22 @@ public class Event extends Task {
                 + "     Got it. I've added this task:\n"
                 + "       [E][ ] " + description + " (From: " + formatDateTime(from)
                 + " to: " + formatDateTime(to) + ") \n"
-                + "     Now you have " + taskCount() + " tasks in the list.\n"
+                + "     Now you have " + TaskManager.getTaskSize() + " tasks in the list.\n"
                 + "____________________________________________________________";
         System.out.println(result);
+    }
+
+    public String messageString() {
+        String result = this.description.startsWith("Invalid")
+                || this.description.startsWith("Description cannot be empty")
+                ? this.description
+                : "______________________________\n"
+                + "     Got it. I've added this task:\n"
+                + "       [E][ ] " + description + " (From: " + formatDateTime(from)
+                + " to: " + formatDateTime(to) + ") \n"
+                + "     Now you have " + TaskManager.getTaskSize() + " tasks in the list.\n"
+                + "______________________________\n";
+        return (result);
     }
 
     /**

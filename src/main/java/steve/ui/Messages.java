@@ -18,6 +18,17 @@ public class Messages {
     }
 
     /**
+     * Returns the greeting message as String for GUI message.
+     */
+    public static String greetingToString() {
+        return "______________________________\n"
+                + "     Hello! I'm Steve\n"
+                + "     What can I do for you?\n"
+                + "______________________________";
+
+    }
+
+    /**
      * Prints the goodbye message when the chatbot exits.
      */
     public static void goodbye() {
@@ -26,6 +37,12 @@ public class Messages {
                 + "     \n" + "Bye! Hope to see you again soon =)" + "\n"
                 + "______________________________"
                 + "______________________________");
+    }
+
+    public static String goodbyeString() {
+        return "______________________________\n"
+                + "Bye! Hope to see you again soon =)\n"
+                + "______________________________\n";
     }
 
     /**
@@ -37,6 +54,14 @@ public class Messages {
                 + "\n 2. deadline \n 3. event \n 4. find \n";
         String third = "Followed by a description of your task! =)";
         System.out.println(first + second + third);
+    }
+
+    public static String unknownString() {
+        String first = "Sorry I don't quite understand!";
+        String second = " Please add a task by entering: \n 1. todo "
+                + "\n 2. deadline \n 3. event \n 4. find \n";
+        String third = "Followed by a description of your task! =)";
+        return (first + second + third);
     }
 
     /**

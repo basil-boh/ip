@@ -26,11 +26,12 @@ public class UnmarkCommand implements Command {
      * and marking the corresponding task as not done.
      *
      * @throws InvalidTaskNumberException If the specified task number is invalid.
-     * @throws NumberFormatException If the user input does not contain a valid number.
+     * @throws NumberFormatException      If the user input does not contain a valid number.
      */
     @Override
-    public void execute() throws InvalidTaskNumberException, NumberFormatException {
+    public String execute() throws InvalidTaskNumberException, NumberFormatException {
         int taskNumber = Integer.parseInt(userInput.split(" ")[1]);
         taskManager.markTask(taskNumber, false); // Mark as not done
+        return "Successfully unmarked!";
     }
 }

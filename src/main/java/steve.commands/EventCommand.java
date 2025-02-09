@@ -26,10 +26,10 @@ public class EventCommand implements Command {
      * creating a new Event task, adding it to the task manager, and displaying its message.
      */
     @Override
-    public void execute() {
+    public String execute() {
         String description = userInput.substring("event".length()).trim();
         Event event = new Event(description);
         taskManager.addTask(event);
-        event.message();
+        return event.messageString();
     }
 }

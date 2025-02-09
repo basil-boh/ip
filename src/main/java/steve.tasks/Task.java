@@ -83,7 +83,7 @@ public class Task {
      *
      * @param isDone A boolean flag indicating whether the task should be marked as done or not.
      */
-    public void markDoneOrNot(boolean isDone) {
+    public void isDone(boolean isDone) {
         this.done = isDone;
     }
 
@@ -146,7 +146,7 @@ public class Task {
                             + "Please enter a number within Task Count Range: " + taskCount);
         } else {
             Task task = userData.get(taskNumber - 1);
-            task.markDoneOrNot(command == CommandType.Mark);
+            task.isDone(command == CommandType.Mark);
             task.message(firstWord);
         }
     }

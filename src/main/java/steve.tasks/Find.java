@@ -56,5 +56,31 @@ public class Find extends Task {
             Messages.border();
         }
     }
+
+    public String filterString() {
+        List<Task> matchingTasks = taskManager.getTasks().stream()
+                .filter(task -> task.getDescription()
+                        .toLowerCase()
+                        .contains(this.description.toLowerCase()))
+                .collect(Collectors.toList());
+
+        if (matchingTasks.isEmpty()) {
+            String s1 = ("______________________________\n");
+            String s2 = ("     There are no matching tasks in your list:");
+            String s3 = ("______________________________\n");
+            return s1 + s2 + s3;
+        } else {
+            String s1 = ("______________________________\n");
+            String s2 = ("Here are the matching tasks in your list: \n");
+            String s3 = "";
+            int i = 1;
+            for (Task task : matchingTasks) {
+                s3 = s3 + i + task.list() + "\n";
+                i++;
+            }
+            String last = ("______________________________\n");
+            return s1 + s2 + s3 + "\n" + last;
+        }
+    }
 }
 

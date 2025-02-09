@@ -25,12 +25,14 @@ public class ListCommand implements Command {
      * Executes the list command by retrieving and displaying all tasks.
      */
     @Override
-    public void execute() {
+    public String execute() {
         List<Task> tasks = taskManager.getTasks();
-        Messages.border();
+        String border = ("______________________________"
+                + "\n");
+        String result = "";
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + tasks.get(i).list());
+            result = result + (i + 1) + tasks.get(i).list() + "\n";
         }
-        Messages.border();
+        return border + result + border;
     }
 }

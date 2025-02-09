@@ -26,10 +26,10 @@ public class TodoCommand implements Command {
      * creating a new ToDo task, adding it to the task manager, and displaying a message.
      */
     @Override
-    public void execute() {
+    public String execute() {
         String description = userInput.substring("todo".length()).trim();
         ToDo todo = new ToDo(description);
         taskManager.addTask(todo);
-        todo.message();
+        return todo.messageString();
     }
 }

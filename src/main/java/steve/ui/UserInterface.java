@@ -2,6 +2,7 @@ package steve.ui;
 
 import java.util.Scanner;
 
+import javafx.application.Platform;
 import steve.commands.Command;
 import steve.commands.CommandCreate;
 import steve.exceptions.InvalidCommandException;
@@ -46,5 +47,22 @@ public class UserInterface {
             userInput = scanner.nextLine();
         }
         Messages.goodbye();
+    }
+
+    public String getResponse(String input) {
+        if (input.equals("bye")) {
+            Platform.exit();
+        }
+
+        try {
+            Command command = CommandCreate.createCommand(input, taskManager);
+            return command.execute();  // Assuming execute() returns a String response
+        } catch (InvalidCommandException e) {
+            return Messages.unknownString();
+        } catch (NumberFormatException e) {
+            return "Invalid number format!";
+        } catch (Exception e) {
+            return "An error occurred: " + e.getMessage();
+        }
     }
 }

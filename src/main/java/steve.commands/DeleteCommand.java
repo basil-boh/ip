@@ -28,8 +28,9 @@ public class DeleteCommand implements Command {
      * @throws NumberFormatException      If the task number is not a valid integer.
      */
     @Override
-    public void execute() throws InvalidTaskNumberException, NumberFormatException {
+    public String execute() throws InvalidTaskNumberException, NumberFormatException {
         int taskNumber = Integer.parseInt(userInput.split(" ")[1]);
         taskManager.deleteTask(taskNumber);
+        return "Task deleted successfully";
     }
 }

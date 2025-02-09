@@ -64,6 +64,18 @@ public class Deadline extends Task {
         System.out.println(result);
     }
 
+    public String messageString() {
+        String result = this.description.startsWith("Invalid")
+                || this.description.startsWith("Description cannot be empty")
+                ? this.description
+                : "____________________________________________________________\n"
+                + "     Got it. I've added this task:\n"
+                + "       [D][ ] " + description + " (By: " + formatDateTime(by) + ") \n"
+                + "     Now you have " + TaskManager.getTaskSize() + " tasks in the list.\n"
+                + "____________________________________________________________";
+        return result;
+    }
+
     /**
      * Returns the description of the Deadline task.
      * If the deadline date/time is set, it is included in the description.

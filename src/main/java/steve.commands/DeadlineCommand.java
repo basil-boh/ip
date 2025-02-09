@@ -32,10 +32,11 @@ public class DeadlineCommand implements Command {
      * and displays the task's associated message.
      */
     @Override
-    public void execute() {
+    public String execute() {
         String description = userInput.substring("deadline".length()).trim();
         Deadline deadline = new Deadline(description);
         taskManager.addTask(deadline);
-        deadline.message();
+        return deadline.messageString();
     }
 }
+

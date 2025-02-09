@@ -11,7 +11,7 @@ import steve.exceptions.InvalidTaskNumberException;
  * deleting tasks, and retrieving the list of tasks.
  */
 public class TaskManager {
-    private ArrayList<Task> tasks;
+    private static ArrayList<Task> tasks;
 
     /**
      * Constructs a TaskManager with an initial list of tasks.
@@ -20,6 +20,10 @@ public class TaskManager {
      */
     public TaskManager(ArrayList<Task> tasks) {
         this.tasks = tasks;
+    }
+
+    public static int getTaskSize() {
+        return tasks.size();
     }
 
     /**
@@ -44,7 +48,7 @@ public class TaskManager {
         if (taskNumber > 0 && taskNumber <= tasks.size()) {
             Task task = tasks.get(taskNumber - 1);
             String result = isDone ? "mark" : "unmark";
-            task.markDoneOrNot(isDone);
+            task.isDone(isDone);
             task.message(result);
         } else {
             throw new InvalidTaskNumberException("Invalid task number: " + taskNumber);

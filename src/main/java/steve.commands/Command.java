@@ -8,5 +8,5 @@ import steve.exceptions.InvalidTaskNumberException;
  * must define its own execution behavior in the {@link #execute()} method.
  */
 public interface Command {
-    void execute() throws InvalidTaskNumberException, NumberFormatException;
+    String execute() throws InvalidTaskNumberException, NumberFormatException;
 }

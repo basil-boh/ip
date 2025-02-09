@@ -5,8 +5,8 @@ package steve.tasks;
  * This class is used to handle tasks of type "Todo" with a description and their status.
  */
 public class ToDo extends Task {
-    protected String description;
-    protected boolean isValid = false;
+    private String description;
+    private boolean isValid = false;
 
     /**
      * Constructs a ToDo task with the specified description.
@@ -46,10 +46,22 @@ public class ToDo extends Task {
                 ? "____________________________________________________________\n"
                 + "     Got it. I've added this task:\n"
                 + "       [T][ ] " + description + "\n"
-                + "     Now you have " + taskCount() + " tasks in the list.\n"
+                + "     Now you have " + TaskManager.getTaskSize() + " tasks in the list.\n"
                 + "____________________________________________________________"
                 : "Description cannot be empty. Usage: todo <description>";
         System.out.println(result);
+    }
+
+    public String messageString() {
+        String result = !this.description.equals("Description cannot be empty. "
+                + "Usage: todo <description>")
+                ? "______________________________\n"
+                + "     Got it. I've added this task:\n"
+                + "       [T][ ] " + description + "\n"
+                + "     Now you have " + TaskManager.getTaskSize() + " tasks in the list.\n"
+                + "______________________________"
+                : "Description cannot be empty. Usage: todo <description>";
+        return (result);
     }
 
     /**
