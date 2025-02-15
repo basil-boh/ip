@@ -74,6 +74,12 @@ public class Event extends Task {
         System.out.println(result);
     }
 
+    /**
+     * Returns a string message about the task, including its description and the date range.
+     * If the task description is valid, it will print the event task details,
+     * including the start and end times. If the description is invalid,
+     * an error message is displayed instead.
+     */
     public String messageString() {
         String result = this.description.startsWith("Invalid")
                 || this.description.startsWith("Description cannot be empty")

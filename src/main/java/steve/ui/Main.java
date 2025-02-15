@@ -5,16 +5,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.image.Image;
-import javafx.scene.layout.Region;
-import steve.storage.FileHandler;
-import steve.tasks.Task;
-import steve.tasks.TaskManager;
-
-import java.util.ArrayList;
 
 /**
  * The main JavaFX application class.
@@ -38,8 +33,8 @@ public class Main extends Application {
         String userText = userInput.getText();
         String steveText = steve.getUi().getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
-          DialogBox.getUserDialog(userText, userImage),
-          DialogBox.getSteveDialog(steveText, steveImage)
+                DialogBox.getUserDialog(userText, userImage),
+                DialogBox.getSteveDialog(steveText, steveImage)
         );
         userInput.clear();
     }
@@ -53,7 +48,7 @@ public class Main extends Application {
         userInput = new TextField();
         sendButton = new Button("Send");
 
-       //Handling user input
+        //Handling user input
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });

@@ -39,14 +39,8 @@ public class Messages {
                 + "______________________________");
     }
 
-    public static String goodbyeString() {
-        return "______________________________\n"
-                + "Bye! Hope to see you again soon =)\n"
-                + "______________________________\n";
-    }
-
     /**
-     * Prints an error message when the chatbot does not understand the user input.
+     * Displays an error message when the chatbot does not understand the user input.
      */
     public static void unknown() {
         String first = "Sorry I don't quite understand!";
@@ -56,6 +50,9 @@ public class Messages {
         System.out.println(first + second + third);
     }
 
+    /**
+     * Prints an error message when the chatbot does not understand the user input.
+     */
     public static String unknownString() {
         String first = "Sorry I don't quite understand!";
         String second = " Please add a task by entering: \n 1. todo "

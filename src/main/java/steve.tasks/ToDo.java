@@ -52,6 +52,10 @@ public class ToDo extends Task {
         System.out.println(result);
     }
 
+    /**
+     * Returns a string message indicating that the ToDo task has been added successfully,
+     * or prints an error message if the description is empty.
+     */
     public String messageString() {
         String result = !this.description.equals("Description cannot be empty. "
                 + "Usage: todo <description>")

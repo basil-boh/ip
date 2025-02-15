@@ -56,7 +56,7 @@ public class UserInterface {
 
         try {
             Command command = CommandCreate.createCommand(input, taskManager);
-            return command.execute();  // Assuming execute() returns a String response
+            return command.execute(); // Assuming execute() returns a String response
         } catch (InvalidCommandException e) {
             return Messages.unknownString();
         } catch (NumberFormatException e) {

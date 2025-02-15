@@ -4,7 +4,6 @@ import java.util.List;
 
 import steve.tasks.Task;
 import steve.tasks.TaskManager;
-import steve.ui.Messages;
 
 /**
  * Represents a command that displays the list of tasks in the task manager.

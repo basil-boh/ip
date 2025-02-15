@@ -64,6 +64,10 @@ public class Deadline extends Task {
         System.out.println(result);
     }
 
+    /**
+     * Returns a string message confirming the creation of the Deadline task.
+     * If the task's description or date/time is invalid, an error message is shown.
+     */
     public String messageString() {
         String result = this.description.startsWith("Invalid")
                 || this.description.startsWith("Description cannot be empty")
