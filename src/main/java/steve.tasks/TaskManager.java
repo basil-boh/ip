@@ -27,6 +27,15 @@ public class TaskManager {
     }
 
     /**
+     * Validates user input of task number.
+     */
+    public boolean validTaskNumber(int taskNum) {
+        assert taskNum > 0 : "Task number cannot be less than 0";
+        assert taskNum <= tasks.size() : "Task number out of range";
+        return taskNum > 0 && taskNum <= tasks.size();
+    }
+
+    /**
      * Adds a task to the task manager if it is valid.
      *
      * @param task The task to be added.
@@ -34,6 +43,7 @@ public class TaskManager {
     public void addTask(Task task) {
         if (task.isValid()) {
             tasks.add(task);
+            Task.saveTasks(task);
         }
     }
 
@@ -45,7 +55,7 @@ public class TaskManager {
      * @throws InvalidTaskNumberException If the task number is invalid.
      */
     public void markTask(int taskNumber, boolean isDone) throws InvalidTaskNumberException {
-        if (taskNumber > 0 && taskNumber <= tasks.size()) {
+        if (validTaskNumber(taskNumber)) {
             Task task = tasks.get(taskNumber - 1);
             String result = isDone ? "mark" : "unmark";
             task.isDone(isDone);
@@ -62,7 +72,7 @@ public class TaskManager {
      * @throws InvalidTaskNumberException If the task number is invalid.
      */
     public void deleteTask(int taskNumber) throws InvalidTaskNumberException {
-        if (taskNumber > 0 && taskNumber <= tasks.size()) {
+        if (validTaskNumber(taskNumber)) {
             tasks.remove(taskNumber - 1);
         } else {
             throw new InvalidTaskNumberException("Invalid task number: " + taskNumber);

@@ -9,13 +9,11 @@ public class TodoTest {
     @Test
     public void testValidTodoMessage() {
         ToDo todo = new ToDo("Read a book");
-        String expectedMessage = "____________________________"
-                + "________________________________\n"
+        String expectedMessage = "______________________________\n"
                 + "     Got it. I've added this task:\n"
                 + "       [T][ ] Read a book\n"
                 + "     Now you have " + todo.taskCount() + " tasks in the list.\n"
-                + "__________________________"
-                + "__________________________________";
+                + "______________________________\n";
 
         assertEquals(expectedMessage, todo.toString());
     }

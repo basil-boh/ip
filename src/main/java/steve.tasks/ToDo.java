@@ -5,7 +5,7 @@ package steve.tasks;
  * This class is used to handle tasks of type "Todo" with a description and their status.
  */
 public class ToDo extends Task {
-    private String description;
+    private final String description;
     private boolean isValid = false;
 
     /**
@@ -15,15 +15,34 @@ public class ToDo extends Task {
      * @param description the description of the ToDo task
      */
     public ToDo(String description) {
-        super(description == null || description.trim().isEmpty()
-                ? "Description cannot be empty. Usage: todo <description>"
-                : description);
-        if (description == null || description.trim().isEmpty()) {
-            this.description = "Description cannot be empty. Usage: todo <description>";
+        super(validateDescription(description));
+        this.description = validateDescription(description);
+        this.isValid = !description.trim().isEmpty();
+        validateTask(this.isValid);
+    }
+
+    /**
+     * Returns the description of empty description error
+     */
+    private static String emptyInputMessage() {
+        return "Description cannot be empty. Usage: todo <description>";
+    }
+
+    /**
+     * Returns string description of task based on validity of description
+     */
+    private static String validateDescription(String description) {
+        return (description == null || description.trim().isEmpty())
+                ? emptyInputMessage()
+                : description;
+    }
+
+    /**
+     * Decreases task count if not valid task
+     */
+    private void validateTask(boolean isValid) {
+        if (!isValid) {
             super.decreaseTaskCount();
-        } else {
-            this.description = description;
-            this.isValid = true;
         }
     }
 
@@ -37,18 +56,23 @@ public class ToDo extends Task {
     }
 
     /**
+     * Returns description of adding a task in
+     */
+    public String addTaskMessage() {
+        return "______________________________\n"
+                + "     Got it. I've added this task:\n"
+                + "       [T][ ] " + description + "\n"
+                + "     Now you have " + taskCount() + " tasks in the list.\n"
+                + "______________________________\n";
+    }
+    /**
      * Prints a message indicating that the ToDo task has been added successfully,
      * or prints an error message if the description is empty.
      */
     public void message() {
-        String result = !this.description.equals("Description cannot be empty. "
-                + "Usage: todo <description>")
-                ? "____________________________________________________________\n"
-                + "     Got it. I've added this task:\n"
-                + "       [T][ ] " + description + "\n"
-                + "     Now you have " + TaskManager.getTaskSize() + " tasks in the list.\n"
-                + "____________________________________________________________"
-                : "Description cannot be empty. Usage: todo <description>";
+        String result = !this.description.equals(emptyInputMessage())
+                ? addTaskMessage()
+                : emptyInputMessage();
         System.out.println(result);
     }
 
@@ -57,15 +81,9 @@ public class ToDo extends Task {
      * or prints an error message if the description is empty.
      */
     public String messageString() {
-        String result = !this.description.equals("Description cannot be empty. "
-                + "Usage: todo <description>")
-                ? "______________________________\n"
-                + "     Got it. I've added this task:\n"
-                + "       [T][ ] " + description + "\n"
-                + "     Now you have " + TaskManager.getTaskSize() + " tasks in the list.\n"
-                + "______________________________"
-                : "Description cannot be empty. Usage: todo <description>";
-        return (result);
+        return !this.description.equals(emptyInputMessage())
+                ? addTaskMessage()
+                : emptyInputMessage();
     }
 
     /**
@@ -76,14 +94,7 @@ public class ToDo extends Task {
      */
     @Override
     public String toString() {
-        return !this.description.equals("Description cannot be empty. Usage: "
-                + "todo <description>")
-                ? "____________________________________________________________\n"
-                + "     Got it. I've added this task:\n"
-                + "       [T][ ] " + description + "\n"
-                + "     Now you have " + taskCount() + " tasks in the list.\n"
-                + "____________________________________________________________"
-                : "Description cannot be empty. Usage: todo <description>";
+        return messageString();
     }
 
     /**
