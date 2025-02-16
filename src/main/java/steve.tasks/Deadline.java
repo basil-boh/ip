@@ -9,9 +9,10 @@ import java.time.format.DateTimeParseException;
  * A Deadline task has a description and a date/time when the task is due.
  */
 public class Deadline extends Task {
-    protected String description;
-    protected LocalDateTime by;
-    protected boolean isValid = false;
+    private static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    private String description;
+    private LocalDateTime by;
+    private boolean isValid = false;
 
     /**
      * Creates a new Deadline task with the specified description.
@@ -20,32 +21,86 @@ public class Deadline extends Task {
      * @param description the description of the deadline task, including a due date/time
      */
     public Deadline(String description) {
-        super(description == null || description.trim().isEmpty()
-                ? "Description cannot be empty. Usage: deadline <description /by yyyy-MM-dd HHmm>"
-                : description);
+        super(validateDescription(description));
+        initializeDeadline(description);
+    }
 
-        if (description != null && !description.isEmpty()) {
-            String[] parts = description.split("/by");
-            if (parts.length == 2) {
-                this.description = parts[0].trim();
-                String dateTimeString = parts[1].trim();
-                try {
-                    // Parse the date and time
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-                    this.by = LocalDateTime.parse(dateTimeString, formatter);
-                    this.isValid = true;
-                } catch (DateTimeParseException e) {
-                    this.description = "Invalid date/time format. Usage: deadline <description /by yyyy-MM-dd HHmm>";
-                    super.decreaseTaskCount();
-                }
-            } else {
-                this.description = "Invalid format. Usage: deadline <description /by yyyy-MM-dd HHmm>";
-                super.decreaseTaskCount();
-            }
-        } else {
-            this.description = "Description cannot be empty. Usage: deadline <description /by yyyy-MM-dd HHmm>";
-            super.decreaseTaskCount();
+    /**
+     * Initializes deadline objects
+     * */
+    public void initializeDeadline(String description) {
+        try {
+            messageFormatter(description);
+            this.isValid = true;
+        } catch (IllegalArgumentException | DateTimeParseException e) {
+            this.description = invalidInputMessage();
+            this.by = null;
+            this.isValid = false;
         }
+    }
+
+    /**
+     * Formats user input description
+     */
+    private void messageFormatter(String description) {
+        String[] parts = descriptionParser(description);
+        this.description = parts[0].trim();
+        this.by = LocalDateTime.parse(parts[1].trim(), INPUT_FORMATTER);
+    }
+
+    /**
+     * Parses user description input into String array of description and deadline
+     */
+    public static String[] descriptionParser(String input) {
+        String description = validateDescription(input);
+        String[] parts = description.split("/by", 2);
+        if (parts.length != 2) {
+            throw new IllegalArgumentException(invalidInputMessage());
+        }
+        return new String[]{parts[0].trim(), parts[1].trim()};
+    }
+
+    /**
+     * Checks if string is empty and returns appropriate string message
+     */
+    private static String validateDescription(String description) {
+        if (description == null || description.trim().isEmpty()) {
+            throw new IllegalArgumentException(emptyInputMessage());
+        }
+        return description;
+    }
+
+    /**
+     * Returns a string indicating invalid input format
+     */
+    public static String invalidInputMessage() {
+        return "Invalid format. Usage: deadline <description /by yyyy-MM-dd HHmm>";
+    }
+
+    /**
+     * Returns a string indicating description is empty
+     */
+    public static String emptyInputMessage() {
+        return "Description cannot be empty. Usage: deadline <description /by yyyy-MM-dd HHmm>";
+    }
+
+    /**
+     * Returns a string message indicating Deadline task is successfully added
+     */
+    public String addTask() {
+        return "______________________________\n"
+                + "     Got it. I've added this task:\n"
+                + "       [D][ ] " + description + " (By: " + formatDateTime(by) + ") \n"
+                + "     Now you have " + TaskManager.getTaskSize() + " tasks in the list.\n"
+                + "______________________________\n";
+    }
+
+    /**
+     * Returns a boolean on whether the deadline object is empty or invalid
+     */
+    public boolean invalidCheck() {
+        return this.description.startsWith("Invalid")
+                || this.description.startsWith("Description cannot be empty");
     }
 
     /**
@@ -53,14 +108,9 @@ public class Deadline extends Task {
      * If the task's description or date/time is invalid, an error message is shown.
      */
     public void message() {
-        String result = this.description.startsWith("Invalid")
-                || this.description.startsWith("Description cannot be empty")
+        String result = invalidCheck()
                 ? this.description
-                : "____________________________________________________________\n"
-                + "     Got it. I've added this task:\n"
-                + "       [D][ ] " + description + " (By: " + formatDateTime(by) + ") \n"
-                + "     Now you have " + taskCount() + " tasks in the list.\n"
-                + "____________________________________________________________";
+                : addTask();
         System.out.println(result);
     }
 
@@ -69,15 +119,9 @@ public class Deadline extends Task {
      * If the task's description or date/time is invalid, an error message is shown.
      */
     public String messageString() {
-        String result = this.description.startsWith("Invalid")
-                || this.description.startsWith("Description cannot be empty")
+        return invalidCheck()
                 ? this.description
-                : "____________________________________________________________\n"
-                + "     Got it. I've added this task:\n"
-                + "       [D][ ] " + description + " (By: " + formatDateTime(by) + ") \n"
-                + "     Now you have " + TaskManager.getTaskSize() + " tasks in the list.\n"
-                + "____________________________________________________________";
-        return result;
+                : addTask();
     }
 
     /**
