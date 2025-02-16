@@ -3,6 +3,7 @@ package steve.tasks;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Represents a general task with a description and a completion status.
@@ -163,5 +164,21 @@ public class Task {
             System.err.println("Error saving tasks: " + e.getMessage());
         }
     }
+
+    /**
+     * Saves list tasks to a file.
+     */
+    public static void saveAllTasks(List<Task> tasks) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) { // No 'append' mode
+            for (Task task : tasks) {
+                writer.write(task.type() + task.getOriginalDescription());
+                writer.newLine();
+            }
+            System.out.println("Tasks updated successfully!");
+        } catch (IOException e) {
+            System.err.println("Error saving tasks: " + e.getMessage());
+        }
+    }
+
 }
 

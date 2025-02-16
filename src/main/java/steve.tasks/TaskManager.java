@@ -74,6 +74,7 @@ public class TaskManager {
     public void deleteTask(int taskNumber) throws InvalidTaskNumberException {
         if (validTaskNumber(taskNumber)) {
             tasks.remove(taskNumber - 1);
+            Task.saveAllTasks(tasks);
         } else {
             throw new InvalidTaskNumberException("Invalid task number: " + taskNumber);
         }

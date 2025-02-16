@@ -62,7 +62,7 @@ public class ToDo extends Task {
         return "______________________________\n"
                 + "     Got it. I've added this task:\n"
                 + "       [T][ ] " + description + "\n"
-                + "     Now you have " + taskCount() + " tasks in the list.\n"
+                + "     Now you have " + TaskManager.getTaskSize() + " tasks in the list.\n"
                 + "______________________________\n";
     }
     /**

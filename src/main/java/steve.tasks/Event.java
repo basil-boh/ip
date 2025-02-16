@@ -10,6 +10,8 @@ import java.time.format.DateTimeParseException;
  * The task ensures that the description is not empty and the date/time format is valid.
  */
 public class Event extends Task {
+    private static final DateTimeFormatter FORMATTER =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     private String description;
     private LocalDateTime from;
     private LocalDateTime to;
@@ -21,38 +23,83 @@ public class Event extends Task {
      * @param description The description of the event task, including the dates.
      */
     public Event(String description) {
-        super(description == null || description.trim().isEmpty()
-                ? "Description cannot be empty. Usage: event <description /from yyyy-MM-dd HHmm /to yyyy-MM-dd HHmm>"
-                : description);
+        super(validateDescription(description));
+        initializeEvent(validateDescription(description));
+    }
 
-        if (description != null && !description.trim().isEmpty()) {
-            String[] parts = description.split("/");
-            if (parts.length == 3) {
-                this.description = parts[0].trim();
-                String fromString = parts[1].replace("from", "").trim();
-                String toString = parts[2].replace("to", "").trim();
-
-                try {
-                    // Parse the start and end dates/times
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-                    this.from = LocalDateTime.parse(fromString, formatter);
-                    this.to = LocalDateTime.parse(toString, formatter);
-                    this.isValid = true;
-                } catch (DateTimeParseException e) {
-                    this.description = "Invalid date/time format. Usage: "
-                            + "event <description /from yyyy-MM-dd HHmm /to yyyy-MM-dd HHmm>";
-                    super.decreaseTaskCount();
-                }
-            } else {
-                this.description = "Invalid format. Usage: "
-                        + "event <description /from yyyy-MM-dd HHmm /to yyyy-MM-dd HHmm>";
-                super.decreaseTaskCount();
-            }
-        } else {
-            this.description = "Description cannot be empty. Usage: "
-                    + "event <description /from yyyy-MM-dd HHmm /to yyyy-MM-dd HHmm>";
+    /**
+     * Initializes event objects
+     * */
+    private void initializeEvent(String description) {
+        try {
+            messageFormatter(description);
+            this.isValid = true;
+        } catch (IllegalArgumentException e) {
+            this.description = invalidFormatMessage();
             super.decreaseTaskCount();
         }
+    }
+
+    /**
+     * Formats user description, from and to keywords
+     * */
+    private void messageFormatter(String description) {
+        String[] parts = extractDescriptionParts(description);
+        this.description = parts[0].trim();
+        this.from = parseDateTime(parts[1].replace("from", "").trim());
+        this.to = parseDateTime(parts[2].replace("to", "").trim());
+    }
+
+    /**
+     * Parses a date-time string into a LocalDateTime object
+     * */
+    private static LocalDateTime parseDateTime(String dateTimeString) {
+        try {
+            return LocalDateTime.parse(dateTimeString, FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException(invalidFormatMessage());
+        }
+    }
+
+    /**
+     * Extracts and validates the event description parts
+     * */
+    private static String[] extractDescriptionParts(String description) {
+        String[] parts = description.split("/");
+        if (parts.length != 3) {
+            throw new IllegalArgumentException(invalidFormatMessage());
+        }
+        return parts;
+    }
+
+    /**
+     * Returns a string message indicating empty description
+     * */
+    public static String emptyInputMessage() {
+        return "Description cannot be empty. Usage: event <description /from yyyy-MM-dd HHmm /to yyyy-MM-dd HHmm>";
+    }
+
+    /**
+     * Returns a string message indicating incorrect input formar
+     * */
+    public static String invalidFormatMessage() {
+        return "Invalid format. Usage: "
+                + "event <description /from yyyy-MM-dd HHmm /to yyyy-MM-dd HHmm>";
+    }
+
+    /**
+     * Returns string based on validity of description (empty or not)
+     * */
+    private static String validateDescription(String description) {
+        if (description == null || description.trim().isEmpty()) {
+            throw new IllegalArgumentException(emptyInputMessage());
+        }
+        return description;
+    }
+
+    private static boolean checkEmptyOrValid(String description) {
+        return description.startsWith("Invalid")
+                || description.startsWith("Description cannot be empty");
     }
 
     /**
@@ -62,16 +109,22 @@ public class Event extends Task {
      * an error message is displayed instead.
      */
     public void message() {
-        String result = this.description.startsWith("Invalid")
-                || this.description.startsWith("Description cannot be empty")
+        String result = checkEmptyOrValid(this.description)
                 ? this.description
-                : "____________________________________________________________\n"
+                : addTaskMessage();
+        System.out.println(result);
+    }
+
+    /**
+     * Returns a string message indicating task is added
+     */
+    public String addTaskMessage() {
+        return "______________________________\n"
                 + "     Got it. I've added this task:\n"
                 + "       [E][ ] " + description + " (From: " + formatDateTime(from)
                 + " to: " + formatDateTime(to) + ") \n"
                 + "     Now you have " + TaskManager.getTaskSize() + " tasks in the list.\n"
-                + "____________________________________________________________";
-        System.out.println(result);
+                + "______________________________\n";
     }
 
     /**
@@ -81,16 +134,9 @@ public class Event extends Task {
      * an error message is displayed instead.
      */
     public String messageString() {
-        String result = this.description.startsWith("Invalid")
-                || this.description.startsWith("Description cannot be empty")
+        return checkEmptyOrValid(this.description)
                 ? this.description
-                : "______________________________\n"
-                + "     Got it. I've added this task:\n"
-                + "       [E][ ] " + description + " (From: " + formatDateTime(from)
-                + " to: " + formatDateTime(to) + ") \n"
-                + "     Now you have " + TaskManager.getTaskSize() + " tasks in the list.\n"
-                + "______________________________\n";
-        return (result);
+                : addTaskMessage();
     }
 
     /**
@@ -101,15 +147,9 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        String result = this.description.startsWith("Invalid")
-                || this.description.startsWith("Description cannot be empty")
+        String result = checkEmptyOrValid(this.description)
                 ? this.description
-                : "____________________________________________________________\n"
-                + "     Got it. I've added this task:\n"
-                + "       [E][ ] " + description + " (From: " + formatDateTime(from)
-                + " to: " + formatDateTime(to) + ") \n"
-                + "     Now you have " + taskCount() + " tasks in the list.\n"
-                + "____________________________________________________________";
+                : addTaskMessage();
         return result;
     }
 
@@ -120,7 +160,8 @@ public class Event extends Task {
      */
     @Override
     public String getDescription() {
-        return this.description + " (From: " + formatDateTime(from) + " to: " + formatDateTime(to) + ") ";
+        return this.description + " (From: " + formatDateTime(from)
+                + " to: " + formatDateTime(to) + ") ";
     }
 
     /**

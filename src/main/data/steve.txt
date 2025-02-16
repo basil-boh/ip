@@ -1,5 +1,2 @@
-Event: project meeting /from 2023-10-15 1400 /to 2023-10-15 1600
-Deadline: return book /by 2019-12-02 1800
-Todo: my hair!
-Todo: my nails!
-Todo: something
+Todo: something!
+Deadline: my homework /by 2025-12-12 1600
