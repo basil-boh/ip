@@ -33,7 +33,7 @@ public class ContactCommand implements Command {
     public String execute() {
         String description = userInput.substring("contact".length()).trim();
         Contact contact = new Contact(description);
-        taskManager.addTask(contact);
+        taskManager.addContact(contact);
         return contact.messageString();
     }
 }

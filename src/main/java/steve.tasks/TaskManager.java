@@ -12,6 +12,7 @@ import steve.exceptions.InvalidTaskNumberException;
  */
 public class TaskManager {
     private static ArrayList<Task> tasks;
+    private static ArrayList<Contact> clients;
 
     /**
      * Constructs a TaskManager with an initial list of tasks.
@@ -20,8 +21,12 @@ public class TaskManager {
      */
     public TaskManager(ArrayList<Task> tasks) {
         this.tasks = tasks;
+        this.clients = new ArrayList<Contact>();
     }
 
+    /**
+     * Returns number of tasks
+     */
     public static int getTaskSize() {
         return tasks.size();
     }
@@ -45,6 +50,15 @@ public class TaskManager {
             tasks.add(task);
             Task.saveTasks(task);
         }
+    }
+
+    /**
+     * Adds a contact to the client list
+     *
+     * @param contact The contact to be added.
+     */
+    public void addContact(Contact contact) {
+        clients.add(contact);
     }
 
     /**
@@ -87,5 +101,14 @@ public class TaskManager {
      */
     public List<Task> getTasks() {
         return tasks;
+    }
+
+    /**
+     * Retrieves the list of contacts managed by the Client array list.
+     *
+     * @return A list of contacts.
+     */
+    public List<Contact> getClients() {
+        return clients;
     }
 }

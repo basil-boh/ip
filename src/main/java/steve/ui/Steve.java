@@ -39,7 +39,7 @@ public class Steve {
      */
     public static void main(String[] args) {
         FileHandler fileHandler = new FileHandler("src/main/data/steve.txt");
-        ArrayList<Task> tasks = fileHandler.loadTasks(); // Load tasks from file
+        ArrayList<Task> tasks = fileHandler.loadTasks();
         TaskManager taskManager = new TaskManager(tasks); // Initialize TaskManager with loaded tasks
         UserInterface ui = new UserInterface(taskManager); // Initialize UserInterface with TaskManager
 

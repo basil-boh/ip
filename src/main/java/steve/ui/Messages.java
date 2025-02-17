@@ -56,7 +56,8 @@ public class Messages {
     public static String unknownString() {
         String first = "Sorry I don't quite understand!";
         String second = " Please add a task by entering: \n 1. todo "
-                + "\n 2. deadline \n 3. event \n 4. find \n 5. contact \n 7. mark \n 8. unmark \n 9. list \n";
+                + "\n 2. deadline \n 3. event \n 4. find \n 5. contact "
+                + "\n 7. mark \n 8. unmark \n 9. list \n 10. clients \n";
         String third = "Followed by a description of your task! =)";
         return (first + second + third);
     }

@@ -39,6 +39,8 @@ public class CommandCreate {
             return new DeleteCommand(taskManager, userInput);
         case "contact":
             return new ContactCommand(taskManager, userInput);
+        case "clients":
+            return new ClientCommand(taskManager);
         default:
             throw new InvalidCommandException("Unknown command: " + firstWord);
         }

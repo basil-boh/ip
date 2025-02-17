@@ -4,7 +4,9 @@ package steve.tasks;
  * Represents a contact in a task management system.
  */
 public class Contact extends Task {
-    private final String name;
+    private String name;
+    private String phone;
+    private String email;
 
     /**
      * Constructs a Contact with the specified name.
@@ -13,7 +15,27 @@ public class Contact extends Task {
      */
     public Contact(String name) {
         super(name);
-        this.name = name;
+        contactInitializer(descriptionParser(name));
+    }
+
+    /**
+     * Parses user description input into String array of name and contact number
+     */
+    public static String[] descriptionParser(String input) {
+        String[] parts = input.split("/", 3);
+        if (parts.length != 3) {
+            throw new IllegalArgumentException(invalidFormatMessage());
+        }
+        return new String[]{parts[0].trim(), parts[1].trim(), parts[2].trim()};
+    }
+
+    /**
+     * Initializes attributes for each contact object
+     */
+    public void contactInitializer(String[] parts) {
+        this.name = parts[0];
+        this.phone = validatePhone(parts[1]);
+        this.email = parts[2];
     }
 
     /**
@@ -25,21 +47,12 @@ public class Contact extends Task {
      */
     public static String validatePhone(String phone) {
         int phoneNumLength = phone.length();
-        if (Integer.parseInt(phone) < 0) {
+        if (Integer.parseInt(phone) < 0) { //Phone Number cannot be negative
             throw new IllegalArgumentException(negativePhoneNumMessage());
-        } else if (phoneNumLength != 8) {
+        } else if (phoneNumLength != 8) { //Phone number must have exactly 8 digits (Following SG HP Format)
             throw new IllegalArgumentException(invalidPhoneLengthMessage());
         }
         return phone;
-    }
-
-    /**
-     * Gets the name of the contact.
-     *
-     * @return The name of the contact.
-     */
-    public String getName() {
-        return this.name;
     }
 
     //MESSAGE METHODS
@@ -49,7 +62,17 @@ public class Contact extends Task {
      * @return A message confirming the contact has been added.
      */
     public String messageString() {
-        return "Successfully added: " + this.name + " to contact list";
+        return "Successfully added to contact list\n"
+                + contactDetails();
+    }
+
+    /**
+     * Returns individual contact details
+     */
+    public String contactDetails() {
+        return "Contact Name: " + this.name
+                + "\nPhone Number: " + this.phone
+                + "\nEmail: " + this.email + "\n";
     }
 
     /**
@@ -68,5 +91,15 @@ public class Contact extends Task {
      */
     public static String negativePhoneNumMessage() {
         return "Invalid phone number entered! Phone number cannot be negative";
+    }
+
+    /**
+     * Returns an error message for invalid contact format.
+     *
+     * @return A message indicating the structure of command is incorrect.
+     */
+    public static String invalidFormatMessage() {
+        return "Invalid format. Enter name & contact number \n"
+                + "Usage: contact <name> / <phone number> / <email> \n";
     }
 }
