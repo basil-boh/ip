@@ -37,6 +37,8 @@ public class CommandCreate {
             return new EventCommand(taskManager, userInput);
         case "delete":
             return new DeleteCommand(taskManager, userInput);
+        case "contact":
+            return new ContactCommand(taskManager, userInput);
         default:
             throw new InvalidCommandException("Unknown command: " + firstWord);
         }
