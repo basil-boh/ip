@@ -72,7 +72,11 @@ public class TaskManager {
         if (validTaskNumber(taskNumber)) {
             Task task = tasks.get(taskNumber - 1);
             String result = isDone ? "mark" : "unmark";
-            task.isDone(isDone);
+            if (task.isDone() == isDone) {
+                System.out.println("Task " + taskNumber + " is already " + result);
+                return;
+            }
+            task.markDone(isDone);
             task.message(result);
         } else {
             throw new InvalidTaskNumberException("Invalid task number: " + taskNumber);

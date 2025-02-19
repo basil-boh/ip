@@ -15,7 +15,7 @@ public class Contact extends Task {
      */
     public Contact(String name) {
         super(name);
-        contactInitializer(descriptionParser(name));
+        contactInitializer(validateDescription(name));
     }
 
     /**
@@ -53,6 +53,18 @@ public class Contact extends Task {
             throw new IllegalArgumentException(invalidPhoneLengthMessage());
         }
         return phone;
+    }
+
+    public static String[] validateDescription(String description) {
+        String[] parts = descriptionParser(description);
+        if (parts[0].trim().isEmpty()) {
+            throw new IllegalArgumentException("Contact name cannot be empty.");
+        } else if (parts[1].trim().isEmpty()) {
+            throw new IllegalArgumentException("Contact Number cannot be empty.");
+        } else if (parts[2].trim().isEmpty()) {
+            throw new IllegalArgumentException("Email cannot be empty.");
+        }
+        return parts;
     }
 
     //MESSAGE METHODS

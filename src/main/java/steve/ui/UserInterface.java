@@ -31,7 +31,7 @@ public class UserInterface {
      */
     public void start() {
         Messages.greeting();
-        String userInput = scanner.nextLine();
+        String userInput = scanner.nextLine().trim();
 
         while (!userInput.equals("bye")) {
             try {
@@ -44,12 +44,17 @@ public class UserInterface {
             } catch (Exception e) {
                 System.out.println("An error occurred: " + e.getMessage());
             }
-            userInput = scanner.nextLine();
+            userInput = scanner.nextLine().trim();
         }
         Messages.goodbye();
     }
 
     public String getResponse(String input) {
+        input = input.trim();
+        if (input.isEmpty()) {
+            return "Input cannot be empty. Please enter a valid command.";
+        }
+
         if (input.equals("bye")) {
             Platform.exit();
         }

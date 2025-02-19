@@ -1,6 +1,7 @@
 package steve.tasks;
 
 import java.time.LocalDateTime;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -45,6 +46,9 @@ public class Deadline extends Task {
     private void messageFormatter(String description) {
         String[] parts = descriptionParser(description);
         this.description = parts[0].trim();
+        if (!isValidDate(parts[1].trim())) {
+            throw new DateTimeParseException("Invalid day/month combination", parts[1], 0);
+        }
         this.by = LocalDateTime.parse(parts[1].trim(), INPUT_FORMATTER);
     }
 
@@ -192,5 +196,19 @@ public class Deadline extends Task {
     private String formatDateTime(LocalDateTime dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy, hh:mm a");
         return dateTime.format(formatter);
+    }
+
+
+    // Helper method to check if the date is valid for the specific month/year
+    private boolean isValidDate(String dateStr) {
+        try {
+            String[] parts = dateStr.split(" ")[0].split("-");
+            int year = Integer.parseInt(parts[0]);
+            int month = Integer.parseInt(parts[1]);
+            int day = Integer.parseInt(parts[2]);
+            return day <= YearMonth.of(year, month).lengthOfMonth();
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

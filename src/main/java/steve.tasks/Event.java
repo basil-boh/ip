@@ -1,6 +1,7 @@
 package steve.tasks;
 
 import java.time.LocalDateTime;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -48,6 +49,9 @@ public class Event extends Task {
         this.description = parts[0].trim();
         this.from = parseDateTime(parts[1].replace("from", "").trim());
         this.to = parseDateTime(parts[2].replace("to", "").trim());
+        if (from.isAfter(to)) {
+            throw new IllegalArgumentException(invalidDateOrderMessage());
+        }
     }
 
     /**
@@ -55,8 +59,12 @@ public class Event extends Task {
      * */
     private static LocalDateTime parseDateTime(String dateTimeString) {
         try {
+            if (!isValidDate(dateTimeString)) {
+                throw new IllegalArgumentException(invalidDateFormatMessage());
+            }
             return LocalDateTime.parse(dateTimeString, FORMATTER);
-        } catch (DateTimeParseException e) {
+
+        } catch (DateTimeParseException | IllegalArgumentException e) {
             throw new IllegalArgumentException(invalidFormatMessage());
         }
     }
@@ -66,7 +74,7 @@ public class Event extends Task {
      * */
     private static String[] extractDescriptionParts(String description) {
         String[] parts = description.split("/");
-        if (parts.length != 3) {
+        if (parts.length != 3 || parts[0].trim().isEmpty()) {
             throw new IllegalArgumentException(invalidFormatMessage());
         }
         return parts;
@@ -80,11 +88,28 @@ public class Event extends Task {
     }
 
     /**
-     * Returns a string message indicating incorrect input formar
+     * Returns a string message indicating incorrect input format
      * */
     public static String invalidFormatMessage() {
         return "Invalid format. Usage: "
                 + "event <description /from yyyy-MM-dd HHmm /to yyyy-MM-dd HHmm>";
+    }
+
+    /**
+     * Returns a string message indicating incorrect date format
+     * */
+    public static String invalidDateFormatMessage() {
+        return "Invalid Date format. Please ensure: \n"
+                + "1. Date is within month range\n"
+                + "2. Month is within year range\n";
+    }
+
+    /**
+     * Returns a string message indicating incorrect date order
+     * */
+    public static String invalidDateOrderMessage() {
+        return "Invalid Date Order. Please ensure: \n"
+                + "Start date time is before End Date time";
     }
 
     /**
@@ -217,5 +242,19 @@ public class Event extends Task {
     private String formatDateTime(LocalDateTime dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy, hh:mm a");
         return dateTime.format(formatter);
+    }
+
+    private static boolean isValidDate(String dateStr) {
+        try {
+            String[] parts = dateStr.split(" ")[0].split("-");
+            int year = Integer.parseInt(parts[0]);
+            int month = Integer.parseInt(parts[1]);
+            int day = Integer.parseInt(parts[2]);
+
+            // Check if the day is valid for the given month
+            return day <= YearMonth.of(year, month).lengthOfMonth();
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

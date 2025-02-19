@@ -94,8 +94,15 @@ public class Task {
      *
      * @param isDone A boolean flag indicating whether the task should be marked as done or not.
      */
-    public void isDone(boolean isDone) {
+    public void markDone(boolean isDone) {
         this.done = isDone;
+    }
+
+    /**
+     * Returns done status of task
+     */
+    public boolean isDone() {
+        return this.done;
     }
 
     /**
