@@ -23,11 +23,11 @@ public class EventTest {
         tasks.add(e);
         TaskManager taskManager = new TaskManager(tasks);
 
-        String expected = "______________________________\n"
+        String expected = "_________________________\n"
                 + "     Got it. I've added this task:\n"
                 + "       [E][ ] meeting " + "(From: Feb 13 2025, 04:00 pm to: Feb 13 2025, 05:00 pm) \n"
                 + "     Now you have " + taskManager.getTaskSize() + " tasks in the list.\n"
-                + "______________________________\n";
+                + "_________________________\n";
 
         assertEquals(expected, e.toString());
     }

@@ -21,11 +21,11 @@ public class TodoTest {
         tasks.add(todo);
         TaskManager taskManager = new TaskManager(tasks);
 
-        String expectedMessage = "______________________________\n"
+        String expectedMessage = "_________________________\n"
                 + "     Got it. I've added this task:\n"
                 + "       [T][ ] Read a book\n"
                 + "     Now you have " + taskManager.getTaskSize() + " tasks in the list.\n"
-                + "______________________________\n";
+                + "_________________________\n";
 
         assertEquals(expectedMessage, todo.toString());
     }

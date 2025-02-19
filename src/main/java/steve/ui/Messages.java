@@ -10,8 +10,8 @@ public class Messages {
      */
     public static void greeting() {
         System.out.println("_________________________\n"
-                + "     Hello! I'm Steve\n"
-                + "     What can I do for you?\n"
+                + "     Hello! I'm Steve 🌈\n"
+                + "     Ready to craft some tasks?\n"
                 + "_________________________\n");
     }
 
@@ -20,8 +20,8 @@ public class Messages {
      */
     public static String greetingToString() {
         return "_________________________\n"
-                + "     Hello! I'm Steve\n"
-                + "     What can I do for you?\n"
+                + "     Hello! I'm Steve 🌈\n"
+                + "     Ready to craft some tasks?\n"
                 + "_________________________\n";
 
     }
@@ -52,12 +52,12 @@ public class Messages {
      * Prints an error message when the chatbot does not understand the user input.
      */
     public static String unknownString() {
-        String first = "Sorry I don't quite understand!";
-        String second = " Please add a task by entering: \n 1. todo "
+        String result = "Whoopsie-doodle! I'm all out of brain cells."
+                + "Try these: \n 1. todo "
                 + "\n 2. deadline \n 3. event \n 4. find \n 5. contact "
-                + "\n 7. mark \n 8. unmark \n 9. list \n 10. clients \n";
-        String third = "Followed by a description of your task! =)";
-        return (first + second + third);
+                + "\n 7. mark \n 8. unmark \n 9. list \n 10. clients \n"
+                + "~ Do-do-do do do-do do, your friend....Steve! 🌈";
+        return result;
     }
 
     /**
