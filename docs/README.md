@@ -1,5 +1,6 @@
 # Steve User Guide
-// Product screenshot goes here
+<img width="399" alt="Ui" src="https://github.com/user-attachments/assets/64e19cae-80e3-4b3b-89cd-1fba7b59eb2b" />
+
 
 ## 📌 Introduction
 Steve is a task and client management chatbot that helps users keep track of their tasks and contacts efficiently through simple command-line interactions.
