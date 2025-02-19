@@ -12,12 +12,12 @@ public class ToDo extends Task {
      * Constructs a ToDo task with the specified description.
      * If the description is empty, sets a default error message and decreases the task count.
      *
-     * @param description the description of the ToDo task
+     * @param userDescription the description of the ToDo task
      */
-    public ToDo(String description) {
-        super(validateDescription(description));
-        this.description = validateDescription(description);
-        this.isValid = !description.trim().isEmpty();
+    public ToDo(String userDescription) {
+        super(validateDescription(userDescription));
+        this.description = validateDescription(userDescription);
+        this.isValid = !userDescription.trim().isEmpty();
         validateTask(this.isValid);
     }
 

@@ -55,13 +55,16 @@ public class Contact extends Task {
         return phone;
     }
 
+    /**
+     * Checks if name, contact number and email are empty
+     */
     public static String[] validateDescription(String description) {
         String[] parts = descriptionParser(description);
-        if (parts[0].trim().isEmpty()) {
+        if (parts[0].isEmpty()) {
             throw new IllegalArgumentException("Contact name cannot be empty.");
-        } else if (parts[1].trim().isEmpty()) {
+        } else if (parts[1].isEmpty()) {
             throw new IllegalArgumentException("Contact Number cannot be empty.");
-        } else if (parts[2].trim().isEmpty()) {
+        } else if (parts[2].isEmpty()) {
             throw new IllegalArgumentException("Email cannot be empty.");
         }
         return parts;

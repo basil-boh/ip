@@ -36,7 +36,7 @@ public class Event extends Task {
             messageFormatter(description);
             this.isValid = true;
         } catch (IllegalArgumentException e) {
-            this.description = invalidFormatMessage();
+            this.description = e.getMessage();
             super.decreaseTaskCount();
         }
     }
