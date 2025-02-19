@@ -77,7 +77,7 @@ public class Contact extends Task {
      * @return A message confirming the contact has been added.
      */
     public String messageString() {
-        return "Successfully added to contact list\n"
+        return "Successfully added to client list\n"
                 + contactDetails();
     }
 
@@ -114,7 +114,7 @@ public class Contact extends Task {
      * @return A message indicating the structure of command is incorrect.
      */
     public static String invalidFormatMessage() {
-        return "Invalid format. Enter name & contact number \n"
+        return "Invalid format\n"
                 + "Usage: contact <name> / <phone number> / <email> \n";
     }
 }

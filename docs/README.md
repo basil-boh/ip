@@ -1,30 +1,72 @@
-# Duke User Guide
-
-// Update the title above to match the actual product name
-
+# Steve User Guide
 // Product screenshot goes here
 
-// Product intro goes here
+## 📌 Introduction
+Steve is a task and client management chatbot that helps users keep track of their tasks and contacts efficiently through simple command-line interactions.
 
-## Adding deadlines
+## 🚀 Features & Commands
+###   📌 Adding a To-Do
 
-// Describe the action and its outcome.
+Adds a task with no start or due date.
 
-// Give examples of usage
+Command Format: `deadline <description> /by yyyy-mm-dd HHMM`
+Example: `todo Buy groceries`
 
-Example: `keyword (optional arguments)`
+### ⏳ Adding a Deadline
 
-// A description of the expected outcome goes here
+Adds a deadline task to task list with information about its due date.
 
-```
-expected output
-```
+Command Format: `deadline <description> /by yyyy-mm-dd HHMM`
+Example: `deadline Submit report /by 2025-02-20 2359`
 
-## Feature ABC
+### 📅 Adding an Event
 
-// Feature details
+Adds an event task to task list with information about its start & end date.
 
+Command Format: `event <description> /from yyyy-mm-dd HHMM /by yyyy-mm-dd HHMM`
+Example `event Team meeting /from 2025-02-22 1400 /by 2025-02-22 1600`
 
-## Feature XYZ
+### 🔍 Finding a Task
 
-// Feature details
+Searches for tasks containing the specified keyword.
+
+Command Format: `find <description>`
+Example: `find report`
+
+### ✅ Marking a Task as Done
+Marks a task as completed.
+
+Command Format: `mark <task index>`
+Example: `mark 2`
+
+### ❌ Unmarking a Task
+Marks a task as incomplete.
+
+Command Format: `unmark <task index>`
+Example: `unmark 2`
+
+### 📜 Viewing All Tasks
+
+Displays the list of all tasks.
+
+Command Format: `list`
+
+### 📇 Creating a Contact
+
+Adds a contact with a name, phone number, and email.
+
+Command Format: `contact <name> / <phone number> / <email>`
+Example: `contact Alice Tan / 98765432 / alice@example.com`
+
+### 👥 Viewing All Contacts
+
+Displays all saved contacts.
+
+Command Format: `clients`
+
+### 🔚 Exiting the Program
+
+Closes the application.
+
+Command Format: `bye`
+
