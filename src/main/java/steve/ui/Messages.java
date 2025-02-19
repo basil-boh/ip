@@ -9,22 +9,20 @@ public class Messages {
      * Prints the greeting message when the chatbot starts.
      */
     public static void greeting() {
-        System.out.println("____________________________"
-                + "________________________________\n"
+        System.out.println("_________________________\n"
                 + "     Hello! I'm Steve\n"
                 + "     What can I do for you?\n"
-                + "_________________________"
-                + "___________________________________");
+                + "_________________________\n");
     }
 
     /**
      * Returns the greeting message as String for GUI message.
      */
     public static String greetingToString() {
-        return "______________________________\n"
+        return "_________________________\n"
                 + "     Hello! I'm Steve\n"
                 + "     What can I do for you?\n"
-                + "______________________________";
+                + "_________________________\n";
 
     }
 

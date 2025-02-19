@@ -39,18 +39,18 @@ public class Find extends Task {
      * Returns a no task found string
      */
     public String noMatchingTasks() {
-        return "______________________________\n"
+        return "_________________________\n"
                 + "     There are no matching tasks in your list:\n"
-                + "______________________________\n";
+                + "_________________________\n";
     }
 
     /**
      * Returns a task found string
      */
     public String getMatchingTasks(List<Task> matchingTasks) {
-        String s1 = ("______________________________\n"
+        String s1 = ("_________________________\n"
                 + "Here are the matching tasks in your list: \n");
-        String s3 = ("______________________________\n");
+        String s3 = ("_________________________\n");
         String s2 = "";
         int i = 1;
         for (Task task : matchingTasks) {

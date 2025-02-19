@@ -88,11 +88,11 @@ public class Deadline extends Task {
      * Returns a string message indicating Deadline task is successfully added
      */
     public String addTask() {
-        return "______________________________\n"
+        return "_________________________\n"
                 + "     Got it. I've added this task:\n"
                 + "       [D][ ] " + description + " (By: " + formatDateTime(by) + ") \n"
                 + "     Now you have " + TaskManager.getTaskSize() + " tasks in the list.\n"
-                + "______________________________\n";
+                + "_________________________\n";
     }
 
     /**

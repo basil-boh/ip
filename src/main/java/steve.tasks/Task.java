@@ -73,20 +73,20 @@ public class Task {
      * returns string message indicating task completion
      */
     public String markTask() {
-        return "____________________________________________________________\n"
+        return "_________________________\n"
                 + "     Nice! I've marked this task as done:\n"
                 + "       [X] " + this.description + "\n"
-                + "____________________________________________________________";
+                + "_________________________\n";
     }
 
     /**
      * returns string message indicating task incomplete
      */
     public String unmarkTask() {
-        return "____________________________________________________________\n"
+        return "_________________________\n"
                 + "     OK, I've marked this task as not done yet:\n"
                 + "       [ ] " + this.description + "\n"
-                + "____________________________________________________________";
+                + "_________________________\n";
     }
 
     /**

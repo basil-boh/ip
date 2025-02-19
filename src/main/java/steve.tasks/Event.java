@@ -119,12 +119,12 @@ public class Event extends Task {
      * Returns a string message indicating task is added
      */
     public String addTaskMessage() {
-        return "______________________________\n"
+        return "_________________________\n"
                 + "     Got it. I've added this task:\n"
                 + "       [E][ ] " + description + " (From: " + formatDateTime(from)
                 + " to: " + formatDateTime(to) + ") \n"
                 + "     Now you have " + TaskManager.getTaskSize() + " tasks in the list.\n"
-                + "______________________________\n";
+                + "_________________________\n";
     }
 
     /**

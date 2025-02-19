@@ -59,11 +59,11 @@ public class ToDo extends Task {
      * Returns description of adding a task in
      */
     public String addTaskMessage() {
-        return "______________________________\n"
+        return "_________________________\n"
                 + "     Got it. I've added this task:\n"
                 + "       [T][ ] " + description + "\n"
                 + "     Now you have " + TaskManager.getTaskSize() + " tasks in the list.\n"
-                + "______________________________\n";
+                + "_________________________\n";
     }
     /**
      * Prints a message indicating that the ToDo task has been added successfully,
