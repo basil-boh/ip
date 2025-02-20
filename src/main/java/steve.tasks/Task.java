@@ -1,6 +1,7 @@
 package steve.tasks;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
@@ -13,7 +14,11 @@ import java.util.List;
  */
 public class Task {
     private static int taskCount = 0;
-    private static final String FILE_PATH = "src/main/data/steve.txt";
+    // Using a user-specific location that works in both IDE and JAR environments
+    private static final String DATA_DIRECTORY = System.getProperty("user.home") + File.separator + "steve-data";
+    private static final String FILE_NAME = "steve.txt";
+    private static final String FILE_PATH = DATA_DIRECTORY + File.separator + FILE_NAME;
+
     private String description;
     private boolean done;
 
@@ -158,11 +163,27 @@ public class Task {
     }
 
     /**
+     * Ensures the data directory exists
+     */
+    private static void ensureDataDirectoryExists() {
+        File directory = new File(DATA_DIRECTORY);
+        if (!directory.exists()) {
+            if (directory.mkdirs()) {
+                System.out.println("Created data directory: " + DATA_DIRECTORY);
+            } else {
+                System.err.println("Failed to create data directory: " + DATA_DIRECTORY);
+            }
+        }
+    }
+
+    /**
      * Saves the task to a file.
      *
      * @param task The task to save.
      */
     public static void saveTasks(Task task) {
+        ensureDataDirectoryExists();
+
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
             writer.write(task.type() + task.getOriginalDescription());
             writer.newLine(); // Add a new line after each task
@@ -176,6 +197,8 @@ public class Task {
      * Saves list tasks to a file.
      */
     public static void saveAllTasks(List<Task> tasks) {
+        ensureDataDirectoryExists();
+
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))) { // No 'append' mode
             for (Task task : tasks) {
                 writer.write(task.type() + task.getOriginalDescription());
@@ -186,6 +209,4 @@ public class Task {
             System.err.println("Error saving tasks: " + e.getMessage());
         }
     }
-
 }
-

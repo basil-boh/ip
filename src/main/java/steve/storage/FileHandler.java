@@ -1,6 +1,7 @@
 package steve.storage;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,6 +16,9 @@ import steve.tasks.ToDo;
  * This class is responsible for reading the tasks stored in a file and converting them into task objects.
  */
 public class FileHandler {
+    private static final String DATA_DIRECTORY = System.getProperty("user.home") + File.separator + "steve-data";
+    private static final String FILE_NAME = "steve.txt";
+    private static final String FILE_PATH = DATA_DIRECTORY + File.separator + FILE_NAME;
     private String filePath;
 
     /**
@@ -55,7 +59,14 @@ public class FileHandler {
      */
     public static ArrayList<Task> loadTasks() {
         ArrayList<Task> tasks = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/main/data/steve.txt"))) {
+        File taskFile = new File(FILE_PATH);
+
+        if (!taskFile.exists()) {
+            System.out.println("No saved tasks found at: " + FILE_PATH);
+            return tasks;
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(taskFile))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 Task task = parseTask(line); // Parse the line into a Task object
@@ -63,6 +74,7 @@ public class FileHandler {
                     tasks.add(task); // Add to the tasks list
                 }
             }
+            System.out.println("Loaded " + tasks.size() + " tasks from: " + FILE_PATH);
         } catch (IOException e) {
             System.err.println("Error loading tasks: " + e.getMessage());
         }
