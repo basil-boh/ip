@@ -64,7 +64,7 @@ public class TaskManager {
     /**
      * Marks a task as done or undone based on the specified task number.
      *
-     * @param taskNumber The number of the task to mark.
+     * @param taskNumber The number of the task to mark as done.
      * @param isDone     True to mark the task as done, false to unmark it.
      * @throws InvalidTaskNumberException If the task number is invalid.
      */
