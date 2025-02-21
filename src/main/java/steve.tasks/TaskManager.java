@@ -43,7 +43,7 @@ public class TaskManager {
     /**
      * Adds a task to the task manager if it is valid.
      *
-     * @param task The task to be added.
+     * @param task The task to be added into the task list.
      */
     public void addTask(Task task) {
         if (task.isValid()) {
