@@ -59,9 +59,9 @@ Adds a contact with a name, phone number, and email.
 Command Format: `contact <name> / <phone number> / <email>`
 Example: `contact Alice Tan / 98765432 / alice@example.com`
 
-### 👥 Viewing All Contacts
+### 👥 Viewing All Clients
 
-Displays all saved contacts.
+Displays all saved client contacts.
 
 Command Format: `clients`
 
