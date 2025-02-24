@@ -29,7 +29,7 @@ Example `event Team meeting /from 2025-02-22 1400 /by 2025-02-22 1600`
 
 ### 🔍 Finding a Task
 
-Searches for tasks containing the specified keyword.
+Searches for tasks containing the specified keyword which will be displayed to user.
 
 Command Format: `find <description>`
 Example: `find report`
