@@ -35,7 +35,7 @@ Command Format: `find <description>`
 Example: `find report`
 
 ### ✅ Marking a Task as Done
-Marks a task as completed.
+Marks a task as completed which will be indicated on display.
 
 Command Format: `mark <task index>`
 Example: `mark 2`
