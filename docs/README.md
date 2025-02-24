@@ -48,7 +48,7 @@ Example: `unmark 2`
 
 ### 📜 Viewing All Tasks
 
-Displays the list of all tasks.
+Displays the list of all tasks for users to reference.
 
 Command Format: `list`
 
