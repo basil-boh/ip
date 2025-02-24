@@ -41,7 +41,7 @@ Command Format: `mark <task index>`
 Example: `mark 2`
 
 ### ❌ Unmarking a Task
-Marks a task as incomplete.
+Marks a task as incomplete which will be indicated on display.
 
 Command Format: `unmark <task index>`
 Example: `unmark 2`
